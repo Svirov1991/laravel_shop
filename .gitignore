@@ -19,9 +19,9 @@
 
 /shop/node_modules/
 
-/shop/.idea/
-/shop/.vscode/
-/shop/*.code-workspace
+/.idea/
+/.vscode/
+/*.code-workspace
 
 /shop/npm-debug.log*
 /shop/yarn-debug.log*
