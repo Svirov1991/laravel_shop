@@ -8,7 +8,6 @@
 !/shop/.env.example
 
 /shop/bootstrap/cache/*.php
-/shop/storage/framework/*
 /shop/storage/logs/*
 /shop/storage/debugbar/*
 
