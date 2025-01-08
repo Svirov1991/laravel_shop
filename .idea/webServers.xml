@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="286a1af1-c94b-432c-9399-8a42cbc56b05" name="http://store.borshchevska.hqsite.online/" url="http://uashared39.twinservers.net">
+        <fileTransfer rootFolder="/public_html" host="uashared39.twinservers.net" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

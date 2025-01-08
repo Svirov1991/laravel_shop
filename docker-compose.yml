@@ -1,0 +1,56 @@
+version: "3.9"
+services:
+  db:
+    image: mysql:8.4
+    restart: always
+    container_name: laravel-my-shop-db
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./storage/docker/db:/var/lib/mysql
+      - ./docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d
+    networks:
+      - laravel_db_network
+  webserver:
+    image: nginx:1.21.4-alpine
+    restart: unless-stopped
+    container_name: laravel-my-shop-webserver
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d
+      - ./storage/docker/logs/nginx/:/var/log/nginx/
+    ports:
+      - "8081:80"
+    networks:
+      - laravel_network
+  php:
+    build:
+      context: .
+      dockerfile: ./docker/php/DockerFile
+      args:
+        UID: ${UID}
+        GID: ${GID}
+    restart: unless-stopped
+    container_name: laravel-my-shop-php
+    volumes:
+      - ./:/var/www
+    networks:
+      - laravel_network
+      - laravel_db_network
+    environment:
+      - PUID=${UID}
+      - PGID=${GID}
+    user: "${UID}:${GID}"
+
+networks:
+  laravel_db_network:
+    driver: bridge
+    name: laravel_db_network
+  laravel_network:
+    driver: bridge
+    name: laravel_network

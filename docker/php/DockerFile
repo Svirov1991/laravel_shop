@@ -1,0 +1,28 @@
+FROM php:8.2-fpm
+
+# Установите необходимые зависимости
+RUN apt-get update && apt-get install -y \
+    libjpeg-dev \
+    libpng-dev \
+    libfreetype6-dev \
+    libzip-dev \
+    libwebp-dev && \
+    docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp && \
+    docker-php-ext-install gd zip exif calendar
+
+# Установите другие расширения
+RUN docker-php-ext-install pdo pdo_mysql
+
+# Установите Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Установите переменные UID и GID
+ARG UID
+ARG GID
+
+# Создайте группу и пользователя
+RUN groupadd -g ${GID} appgroup && \
+    useradd -u ${UID} -g appgroup -m appuser
+
+# Переключитесь на нового пользователя
+USER appuser

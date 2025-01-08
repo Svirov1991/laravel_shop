@@ -1,0 +1,157 @@
+[18-Dec-2024 18:40:29 UTC] PHP Warning:  symlink(): No such file or directory in /home2/borshche/store.borshchevska.hqsite.online/public/test.php on line 2
+[18-Dec-2024 18:44:09 UTC] PHP Warning:  require(../bootstrap/autoload.php): Failed to open stream: No such file or directory in /home2/borshche/store.borshchevska.hqsite.online/public/test.php on line 4
+[18-Dec-2024 18:44:09 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '../bootstrap/autoload.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home2/borshche/store.borshchevska.hqsite.online/public/test.php:4
+Stack trace:
+#0 {main}
+  thrown in /home2/borshche/store.borshchevska.hqsite.online/public/test.php on line 4
+[18-Dec-2024 18:44:11 UTC] PHP Warning:  require(../bootstrap/autoload.php): Failed to open stream: No such file or directory in /home2/borshche/store.borshchevska.hqsite.online/public/test.php on line 4
+[18-Dec-2024 18:44:11 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '../bootstrap/autoload.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home2/borshche/store.borshchevska.hqsite.online/public/test.php:4
+Stack trace:
+#0 {main}
+  thrown in /home2/borshche/store.borshchevska.hqsite.online/public/test.php on line 4
+[18-Dec-2024 18:44:40 UTC] PHP Warning:  require(/home2/borshche/store.borshchevska.hqsite.online/public/../bootstrap/autoload.php): Failed to open stream: No such file or directory in /home2/borshche/store.borshchevska.hqsite.online/public/test.php on line 4
+[18-Dec-2024 18:44:40 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/borshche/store.borshchevska.hqsite.online/public/../bootstrap/autoload.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home2/borshche/store.borshchevska.hqsite.online/public/test.php:4
+Stack trace:
+#0 {main}
+  thrown in /home2/borshche/store.borshchevska.hqsite.online/public/test.php on line 4
+[18-Dec-2024 18:44:41 UTC] PHP Warning:  require(/home2/borshche/store.borshchevska.hqsite.online/public/../bootstrap/autoload.php): Failed to open stream: No such file or directory in /home2/borshche/store.borshchevska.hqsite.online/public/test.php on line 4
+[18-Dec-2024 18:44:41 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/borshche/store.borshchevska.hqsite.online/public/../bootstrap/autoload.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home2/borshche/store.borshchevska.hqsite.online/public/test.php:4
+Stack trace:
+#0 {main}
+  thrown in /home2/borshche/store.borshchevska.hqsite.online/public/test.php on line 4
+[18-Dec-2024 18:47:31 UTC] PHP Fatal error:  Uncaught ReflectionException: Class "request" does not exist in /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php:912
+Stack trace:
+#0 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php(912): ReflectionClass->__construct()
+#1 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build()
+#2 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(963): Illuminate\Container\Container->resolve()
+#3 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve()
+#4 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(948): Illuminate\Container\Container->make()
+#5 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make()
+#6 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(218): Illuminate\Container\Container->offsetGet()
+#7 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(195): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse()
+#8 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(255): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException()
+#9 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}()
+#10 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [request] does not exist. in /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php:914
+Stack trace:
+#0 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build()
+#1 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(963): Illuminate\Container\Container->resolve()
+#2 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve()
+#3 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(948): Illuminate\Container\Container->make()
+#4 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make()
+#5 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(218): Illuminate\Container\Container->offsetGet()
+#6 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(195): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse()
+#7 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(255): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException()
+#8 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}()
+#9 {main}
+  thrown in /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 914
+[18-Dec-2024 18:47:47 UTC] PHP Fatal error:  Uncaught ReflectionException: Class "request" does not exist in /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php:912
+Stack trace:
+#0 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php(912): ReflectionClass->__construct()
+#1 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build()
+#2 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(963): Illuminate\Container\Container->resolve()
+#3 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve()
+#4 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(948): Illuminate\Container\Container->make()
+#5 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make()
+#6 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(218): Illuminate\Container\Container->offsetGet()
+#7 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(195): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse()
+#8 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(255): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException()
+#9 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}()
+#10 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [request] does not exist. in /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php:914
+Stack trace:
+#0 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build()
+#1 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(963): Illuminate\Container\Container->resolve()
+#2 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve()
+#3 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(948): Illuminate\Container\Container->make()
+#4 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make()
+#5 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(218): Illuminate\Container\Container->offsetGet()
+#6 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(195): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse()
+#7 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(255): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException()
+#8 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}()
+#9 {main}
+  thrown in /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 914
+[18-Dec-2024 18:50:23 UTC] PHP Fatal error:  Uncaught ReflectionException: Class "request" does not exist in /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php:912
+Stack trace:
+#0 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php(912): ReflectionClass->__construct()
+#1 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build()
+#2 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(963): Illuminate\Container\Container->resolve()
+#3 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve()
+#4 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(948): Illuminate\Container\Container->make()
+#5 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make()
+#6 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(218): Illuminate\Container\Container->offsetGet()
+#7 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(195): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse()
+#8 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(255): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException()
+#9 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}()
+#10 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [request] does not exist. in /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php:914
+Stack trace:
+#0 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build()
+#1 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(963): Illuminate\Container\Container->resolve()
+#2 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve()
+#3 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(948): Illuminate\Container\Container->make()
+#4 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make()
+#5 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(218): Illuminate\Container\Container->offsetGet()
+#6 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(195): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse()
+#7 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(255): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException()
+#8 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}()
+#9 {main}
+  thrown in /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 914
+[18-Dec-2024 18:50:56 UTC] PHP Fatal error:  Uncaught ReflectionException: Class "request" does not exist in /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php:912
+Stack trace:
+#0 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php(912): ReflectionClass->__construct()
+#1 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build()
+#2 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(963): Illuminate\Container\Container->resolve()
+#3 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve()
+#4 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(948): Illuminate\Container\Container->make()
+#5 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make()
+#6 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(218): Illuminate\Container\Container->offsetGet()
+#7 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(195): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse()
+#8 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(255): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException()
+#9 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}()
+#10 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [request] does not exist. in /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php:914
+Stack trace:
+#0 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build()
+#1 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(963): Illuminate\Container\Container->resolve()
+#2 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve()
+#3 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(948): Illuminate\Container\Container->make()
+#4 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make()
+#5 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(218): Illuminate\Container\Container->offsetGet()
+#6 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(195): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse()
+#7 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(255): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException()
+#8 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}()
+#9 {main}
+  thrown in /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 914
+[18-Dec-2024 18:52:44 UTC] PHP Fatal error:  Uncaught ReflectionException: Class "request" does not exist in /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php:912
+Stack trace:
+#0 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php(912): ReflectionClass->__construct()
+#1 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build()
+#2 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(963): Illuminate\Container\Container->resolve()
+#3 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve()
+#4 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(948): Illuminate\Container\Container->make()
+#5 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make()
+#6 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(218): Illuminate\Container\Container->offsetGet()
+#7 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(195): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse()
+#8 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(255): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException()
+#9 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}()
+#10 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [request] does not exist. in /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php:914
+Stack trace:
+#0 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build()
+#1 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(963): Illuminate\Container\Container->resolve()
+#2 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve()
+#3 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(948): Illuminate\Container\Container->make()
+#4 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make()
+#5 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(218): Illuminate\Container\Container->offsetGet()
+#6 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(195): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse()
+#7 /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(255): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException()
+#8 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}()
+#9 {main}
+  thrown in /home2/borshche/store.borshchevska.hqsite.online/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 914
+[20-Dec-2024 11:46:46 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home2/borshche/store.borshchevska.hqsite.online/vendor/symfony/polyfill-mbstring/Mbstring.php on line 667
