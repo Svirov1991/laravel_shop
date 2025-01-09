@@ -15,55 +15,77 @@
                         <div class="product-single-item" data-margin-bottom="63">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <!--== Start Product Thumbnail Area ==-->
-                                    <div class="product-thumb">
-                                        <div class="swiper-container single-product-thumb-slider">
-                                            <div class="swiper-wrapper">
-                                                @php
-                                                $images = json_decode( $product->images );
-                                                $image_thumbnails = json_decode( $product->image_thumbnails );
-                                                @endphp
-                                                @foreach( $images as $k => $img)
-                                                    <div class="swiper-slide">
-                                                        <div class="zoom zoom-hover">
-                                                            <a class="lightbox-image" data-fancybox="gallery" href="{!! Storage::disk( config('voyager.storage.disk') )->url($img) !!}">
-                                                                {!! getImage( [
-                                                                    'image' => $img,
-                                                                    'thumbnails' => $image_thumbnails[$k] ?? [],
+                                    @php
+                                        $images = json_decode( $product->images );
+                                        $image_thumbnails = json_decode( $product->image_thumbnails );
+                                    @endphp
+                                    @if( count( $images ) < 2 )
+                                        <div class="product-thumb">
+                                            <div class="zoom zoom-hover">
+                                                <a class="lightbox-image" data-fancybox="gallery"
+                                                   href="{!! Storage::disk( config('voyager.storage.disk') )->url( $images[0] ) !!}">
+                                                    {!! getImage( [
+                                                                    'image' => $images[0] ?? [],
+                                                                    'thumbnails' => $image_thumbnails[0] ?? [],
                                                                     'main_size' => 570,
                                                                     'sizes' => [ 991 => 100, 1200 => 50, 'default' => '570px'],
                                                                     'alt' => $product->title,
                                                                     'class' => 'w-100'
                                                                     ] ) !!}
-                                                            </a>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    @else
+                                        <!--== Start Product Thumbnail Area ==-->
+                                        <div class="product-thumb">
+                                            <div class="swiper-container single-product-thumb-slider">
+                                                <div class="swiper-wrapper">
+
+                                                    @foreach( $images as $k => $img)
+                                                        <div class="swiper-slide">
+                                                            <div class="zoom zoom-hover">
+                                                                <a class="lightbox-image" data-fancybox="gallery"
+                                                                   href="{!! Storage::disk( config('voyager.storage.disk') )->url($img) !!}">
+                                                                    {!! getImage( [
+                                                                        'image' => $img,
+                                                                        'thumbnails' => $image_thumbnails[$k] ?? [],
+                                                                        'main_size' => 570,
+                                                                        'sizes' => [ 991 => 100, 1200 => 50, 'default' => '570px'],
+                                                                        'alt' => $product->title,
+                                                                        'class' => 'w-100'
+                                                                        ] ) !!}
+                                                                </a>
+                                                            </div>
                                                         </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--== End Product Thumbnail Area ==-->
+
+                                        <!--== Start Product Nav Area ==-->
+                                        <div class="swiper-container single-product-nav-slider product-nav">
+                                            <div class="swiper-wrapper">
+                                                @foreach( $images as $k => $img)
+                                                    <div class="swiper-slide">
+                                                        {!! getImage( [
+                                                            'image' => $img,
+                                                            'thumbnails' => $image_thumbnails[$k] ?? [],
+                                                            'main_size' => 114,
+                                                            'sizes' => [ 991 => 16, 1200 => 9, 'default' => '114px'],
+                                                            'alt' => $product->title,
+                                                            ] ) !!}
                                                     </div>
                                                 @endforeach
                                             </div>
+                                            <!--== Add Swiper navigation Buttons ==-->
+                                            <div class="swiper-button-prev"><i class="ei ei-icon_arrow_carrot-left"></i>
+                                            </div>
+                                            <div class="swiper-button-next"><i
+                                                    class="ei ei-icon_arrow_carrot-right"></i></div>
                                         </div>
-                                    </div>
-                                    <!--== End Product Thumbnail Area ==-->
-
-                                    <!--== Start Product Nav Area ==-->
-                                    <div class="swiper-container single-product-nav-slider product-nav">
-                                        <div class="swiper-wrapper">
-                                            @foreach( $images as $k => $img)
-                                                <div class="swiper-slide">
-                                                    {!! getImage( [
-                                                        'image' => $img,
-                                                        'thumbnails' => $image_thumbnails[$k] ?? [],
-                                                        'main_size' => 114,
-                                                        'sizes' => [ 991 => 16, 1200 => 9, 'default' => '114px'],
-                                                        'alt' => $product->title,
-                                                        ] ) !!}
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                        <!--== Add Swiper navigation Buttons ==-->
-                                        <div class="swiper-button-prev"><i class="ei ei-icon_arrow_carrot-left"></i></div>
-                                        <div class="swiper-button-next"><i class="ei ei-icon_arrow_carrot-right"></i></div>
-                                    </div>
-                                    <!--== End Product Nav Area ==-->
+                                        <!--== End Product Nav Area ==-->
+                                    @endif
                                 </div>
                                 <div class="col-lg-6">
                                     <!--== Start Product Info Area ==-->

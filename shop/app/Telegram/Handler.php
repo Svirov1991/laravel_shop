@@ -29,6 +29,7 @@ class Handler extends WebhookHandler
 //https://apps.timwhitlock.info/emoji/tables/unicode
     public function start()
     {
+        $this->reply('');
         $logo               = Storage::disk(
             config('voyager.storage.disk')
         )->url(
@@ -54,6 +55,7 @@ class Handler extends WebhookHandler
 
     public function category()
     {
+        $this->reply('');
         $productOffset = (int) $this->data->get('offset', 0);
         $categoryId = $this->data->get('cat_id');
         $count_products = Product::where('product_category_id', $categoryId)->where(
@@ -75,12 +77,17 @@ class Handler extends WebhookHandler
             $count_products,
             $productOffset
         );
-        $this->chat->mediaGroup($images)->send();
-        $this->chat->html( $description )->keyboard( $keyboard )->send();
+        if( count($images) == 1 ){
+            $this->chat->photo($images[0]['media'])->html( $description )->keyboard( $keyboard )->send();
+        } else {
+            $this->chat->mediaGroup($images)->silent()->send();
+            $this->chat->html( $description )->keyboard( $keyboard )->send();
+        }
 
     }
 
     public function contacts(){
+        $this->reply('');
         $text = "<b>Контакти</b>";
         $text .= "\n\n" . "<b>Телефон:</b> <a href='tel:" . setting('site.phone') ."'>" . setting('site.phone') . "</a>";
         $text .= "\n\n" . "<b>Адреса:</b> " . setting('site.address');
@@ -91,6 +98,7 @@ class Handler extends WebhookHandler
 
     public function deliveryAndPayment()
     {
+        $this->reply('');
         $text = "<b>Доставка та оплата</b>";
         $text .= "\n\n" . Helper::sanitizeTelegramHtml(
                 setting('site.shipping_policy')
