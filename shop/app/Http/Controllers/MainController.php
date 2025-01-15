@@ -38,6 +38,10 @@ class MainController extends BaseController
     {
         $page = Page::where('slug', $url_slug)->first();
         if ($page) {
+            $mainPage = setting('site.home_page');
+            if ( ! empty($mainPage) && $page->id == $mainPage) {
+                return redirect()->route('home');
+            }
             $breadcrumbs = [
                 ['name' => __('messages.main'), 'url' => route('home')],
                 ['name' => $page->title, 'url' => route('handle-slug', $page->slug)],

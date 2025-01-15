@@ -20,7 +20,7 @@ class OrderController extends Controller
 
         $order = $this->service->makeOrder( $request->validated() );
         if( !$order ){
-            redirect()->route('cart')->with('error', __('messages.something_went_wrong'));;
+            return redirect()->route('cart')->with('error', __('messages.something_went_wrong'));;
         }
 
         return redirect()->route('checkout' )->with('success', __('messages.cart.order_successfully'));

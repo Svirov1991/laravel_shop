@@ -17,6 +17,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('products/{id}/edit', [\App\Http\Controllers\VoyagerProductController::class, 'edit'])->name('voyager.products.edit');
     Route::get('products/create', [\App\Http\Controllers\VoyagerProductController::class, 'create'])->name('voyager.products.create');
 });
+Route::get('/sitemap.xml', [\App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap');
+Route::get('/robots.txt', [App\Http\Controllers\SitemapController::class, 'robots'])->name('robots');
 
 Route::middleware([ \App\Http\Middleware\LocaleMiddleware::class] )->group(function() {
     Route::get('/language/{locale}', [\App\Http\Controllers\LanguageController::class, 'switch'])->name('language-switch');
@@ -56,5 +58,7 @@ Route::middleware([ \App\Http\Middleware\LocaleMiddleware::class] )->group(funct
     Route::get( '/{category_slug}/{slug}', [\App\Http\Controllers\MainController::class, 'singleItem'])->name('single-item');
 
 });
+
+
 
 
