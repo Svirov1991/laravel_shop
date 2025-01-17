@@ -38,7 +38,7 @@ class ShopController extends Controller
 
         $product->setRelation('category', $category);
 
-        $relatedProducts = Product::with('attributeValues', 'category')->where( 'status', 'PUBLISHED' )->limit(12)->get();
+        $relatedProducts = Product::with('attributeValues', 'category')->whereNot('id', $product->id)->where( 'product_category_id', $product->category->id )->where( 'status', 'PUBLISHED' )->limit(12)->get();
         $breadcrumbs = [
             ['name' => 'Головна', 'url' => route('home')],
             ['name' => $category->title, 'url' => route('handle-slug', $product->category->slug)],

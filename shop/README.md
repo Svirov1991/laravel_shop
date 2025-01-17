@@ -65,13 +65,9 @@ our database in the selected settlement) and a drop-down list of branches in the
 
 - Exchange rate update https://you-site.com/update-currencies (it is recommended to call every day, updated
   from https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5 )
-- Nova Poshta update areas https://you-site.com/np/update?type=areas (Updates areas, you need to call 1 time when
-
-starting the application )
+- Nova Poshta update areas https://you-site.com/np/update?type=areas (Updates areas, you need to call 1 time when starting the application )
 - Nova Poshta update areas https://you-site.com/np/update?type=districts (Updates districts, but to update
-  all districts, 1 run may not be enough, call several times when
-
-starting the application )
+  all districts, 1 run may not be enough, call several times when starting the application )
 - Nova Poshta update areas https://you-site.com/np/update?type=settlements (Updates settlements,
   it is advisable to call with a frequency of 5 minutes at night )
 - Nova Poshta update areas https://you-site.com/np/update?type=offices ( Updates departments, call with

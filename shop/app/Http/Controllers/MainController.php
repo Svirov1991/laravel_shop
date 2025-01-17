@@ -36,12 +36,8 @@ class MainController extends BaseController
 
     public function handleSlug($url_slug)
     {
-        $page = Page::where('slug', $url_slug)->first();
+        $page = Page::where('slug', $url_slug)->where('status', 'ACTIVE')->first();
         if ($page) {
-            $mainPage = setting('site.home_page');
-            if ( ! empty($mainPage) && $page->id == $mainPage) {
-                return redirect()->route('home');
-            }
             $breadcrumbs = [
                 ['name' => __('messages.main'), 'url' => route('home')],
                 ['name' => $page->title, 'url' => route('handle-slug', $page->slug)],

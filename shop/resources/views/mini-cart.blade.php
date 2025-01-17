@@ -7,9 +7,13 @@
         @foreach( $products as $product)
                 <div class="cart-item cart-item-{{ $product->cart->key }}">
                     <div class="thumb">
+                        @php
+                            $images = json_decode($product->images);
+                            $image_thumbnails = json_decode($product->image_thumbnails);
+                        @endphp
                         {!! getImage( [
-                            'image' => json_decode($product->images)[0] ?? null,
-                            'thumbnails' => json_decode($product->image_thumbnails)[0] ?? [],
+                            'image' => ( is_array( $images ) ) ? $images[0] ?? null : null,
+                            'thumbnails' => ( is_array( $image_thumbnails ) ) ? $image_thumbnails[0] ?? [] : [],
                             'main_size' => 160,
                             'sizes' => ['default' => '160px'],
                             'alt' => $product->title,
@@ -37,7 +41,7 @@
                         @if( $product->getPrice() )
                             <span class="product-price">{{ $product->getPrice() }} {{ $product->getCurrencySymbol() }}</span>
                         @endif
-                        <a class="cart-trash" href="javascript:void(0);" onclick="removeFromCart( '{{ $product->cart->key }}' )"><i class="fa fa-trash"></i></a>
+                        <a class="cart-trash" href="javascript:void(0);" role="button" onclick="removeFromCart( '{{ $product->cart->key }}' )"><i class="fa fa-trash"></i></a>
                     </div>
                 </div>
         @endforeach

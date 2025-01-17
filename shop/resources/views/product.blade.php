@@ -25,8 +25,8 @@
                                                 <a class="lightbox-image" data-fancybox="gallery"
                                                    href="{!! Storage::disk( config('voyager.storage.disk') )->url( $images[0] ) !!}">
                                                     {!! getImage( [
-                                                                    'image' => $images[0] ?? [],
-                                                                    'thumbnails' => $image_thumbnails[0] ?? [],
+                                                                    'image' => ( is_array( $images ) ) ? $images[0] ?? null : null,
+                                                                    'thumbnails' => ( is_array( $image_thumbnails ) ) ? $image_thumbnails[0] ?? [] : [],
                                                                     'main_size' => 570,
                                                                     'sizes' => [ 991 => 100, 1200 => 50, 'default' => '570px'],
                                                                     'alt' => $product->title,
@@ -48,7 +48,7 @@
                                                                    href="{!! Storage::disk( config('voyager.storage.disk') )->url($img) !!}">
                                                                     {!! getImage( [
                                                                         'image' => $img,
-                                                                        'thumbnails' => $image_thumbnails[$k] ?? [],
+                                                                        'thumbnails' => ( is_array( $image_thumbnails ) ) ? $image_thumbnails[$k] ?? [] : [],
                                                                         'main_size' => 570,
                                                                         'sizes' => [ 991 => 100, 1200 => 50, 'default' => '570px'],
                                                                         'alt' => $product->title,
@@ -70,7 +70,7 @@
                                                     <div class="swiper-slide">
                                                         {!! getImage( [
                                                             'image' => $img,
-                                                            'thumbnails' => $image_thumbnails[$k] ?? [],
+                                                            'thumbnails' => ( is_array( $image_thumbnails ) ) ? $image_thumbnails[$k] ?? [] : [],
                                                             'main_size' => 114,
                                                             'sizes' => [ 991 => 16, 1200 => 9, 'default' => '114px'],
                                                             'alt' => $product->title,
@@ -140,17 +140,17 @@
                                                             </div>
                                                         </div>
                                                         <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                                        <a class="btn-product-add product_form" href="javascript:void(0);" data-type="0">{{ __('messages.add_to_cart') }}</a>
+                                                        <a class="btn-product-add product_form" href="javascript:void(0);" role="button" data-type="0">{{ __('messages.add_to_cart') }}</a>
                                                     </div>
                                                     @if(!isFavorites($product->id ))
                                                         <div class="product-wishlist">
-                                                            <a href="javascript:void(0);"
+                                                            <a href="javascript:void(0);" role="button"
                                                                onclick="toogleFavorit({{ $product->id }}, this );"
                                                                class="btn-wishlist">{{ __('messages.in_favorites') }}</a>
                                                         </div>
                                                     @endif
                                                     <div class="payment-button">
-                                                        <a href="javascript:void(0);" class="btn-payment product_form" data-type="1">{{ __('messages.buy_now') }}</a>
+                                                        <a href="javascript:void(0);" role="button" class="btn-payment product_form" data-type="1">{{ __('messages.buy_now') }}</a>
                                                     </div>
         {{--                                            <div class="social-sharing">--}}
         {{--                                                <span>Share:</span>--}}
@@ -231,37 +231,39 @@
         </section>
         <!--== End Product Single Area Wrapper ==-->
 
-        <!--== Start Product Area Wrapper ==-->
-        <section class="product-area product-new-arrivals-area product-related-area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-7 m-auto">
-                        <div class="section-title text-center"  >
-                            <h2 class="title">{{ __('messages.related_products') }}</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="swiper-container swiper-slide-gap product-slider-container">
-                            <div class="swiper-wrapper">
-                                @foreach ($relatedProducts as $relatedProduct)
-                                    <div class="swiper-slide">
-                                        <!--== Start Shop Item ==-->
-                                        @include( 'product-item', ['product' => $relatedProduct] )
-                                        <!--== End Shop Item ==-->
-                                    </div>
-                                @endforeach
+        @if( count($relatedProducts) > 0 )
+            <!--== Start Product Area Wrapper ==-->
+            <section class="product-area product-new-arrivals-area product-related-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-7 m-auto">
+                            <div class="section-title text-center"  >
+                                <h2 class="title">{{ __('messages.related_products') }}</h2>
                             </div>
-                            <!--== Add Swiper navigation Buttons ==-->
-                            <div class="swiper-button-prev"><i class="ei ei-icon_arrow_carrot-left"></i></div>
-                            <div class="swiper-button-next"><i class="ei ei-icon_arrow_carrot-right"></i></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="swiper-container swiper-slide-gap product-slider-container">
+                                <div class="swiper-wrapper">
+                                    @foreach ($relatedProducts as $relatedProduct)
+                                        <div class="swiper-slide">
+                                            <!--== Start Shop Item ==-->
+                                            @include( 'product-item', ['product' => $relatedProduct] )
+                                            <!--== End Shop Item ==-->
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <!--== Add Swiper navigation Buttons ==-->
+                                <div class="swiper-button-prev"><i class="ei ei-icon_arrow_carrot-left"></i></div>
+                                <div class="swiper-button-next"><i class="ei ei-icon_arrow_carrot-right"></i></div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <!--== End Product Area Wrapper ==-->
+            </section>
+            <!--== End Product Area Wrapper ==-->
+        @endif
     </main>
 @endsection
 

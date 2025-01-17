@@ -34,12 +34,16 @@
                                     @foreach($cartProducts as $product)
                                             <tr class="cart-item cart-item-{{ $product->cart->key }}" data-key="{{ $product->cart->key }}">
                                                 <td class="indecor-product-remove">
-                                                    <a href="javascript:void(0);" onclick="removeFromCart( '{{ $product->cart->key }}' )"><i class="fa fa-times"></i></a>
+                                                    <a href="javascript:void(0);" role="button" onclick="removeFromCart( '{{ $product->cart->key }}' )"><i class="fa fa-times"></i></a>
                                                 </td>
                                                 <td class="indecor-product-thumbnail">
+                                                    @php
+                                                        $images = json_decode($product->images);
+                                                        $image_thumbnails = json_decode($product->image_thumbnails);
+                                                    @endphp
                                                     {!! getImage( [
-                                                        'image' => json_decode($product->images)[0] ?? null,
-                                                        'thumbnails' => json_decode($product->image_thumbnails)[0] ?? [],
+                                                        'image' => ( is_array( $images ) ) ? $images[0] ?? null : null,
+                                                        'thumbnails' => ( is_array( $image_thumbnails ) ) ? $image_thumbnails[0] ?? [] : [],
                                                         'main_size' => 160,
                                                         'sizes' => ['default' => '160px'],
                                                         'alt' => $product->title,
@@ -85,7 +89,7 @@
                                     <div class="coupon-all">
                                         <div class="coupon">
                                             <a class="button" href="{{ Route('home') }}">{{ __('messages.continue_shopping') }}</a>
-                                            <a class="button" href="javascript:void(0);" onclick="clearCard();">{{ __('messages.empty_cart') }}</a>
+                                            <a class="button" href="javascript:void(0);" role="button" onclick="clearCard();">{{ __('messages.empty_cart') }}</a>
                                         </div>
                                     </div>
                                 </div>

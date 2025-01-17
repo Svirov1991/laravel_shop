@@ -2,9 +2,13 @@
 @foreach($products as $product)
         <div class="shipping-cart-item">
             <div class="thumb">
+                @php
+                    $images = json_decode($product->images);
+                    $image_thumbnails = json_decode($product->image_thumbnails);
+                @endphp
                 {!! getImage( [
-                            'image' => json_decode($product->images)[0] ?? null,
-                            'thumbnails' => json_decode($product->image_thumbnails)[0] ?? [],
+                            'image' => ( is_array( $images ) ) ? $images[0] ?? null : null,
+                            'thumbnails' => ( is_array( $image_thumbnails ) ) ? $image_thumbnails[0] ?? [] : [],
                             'main_size' => 100,
                             'sizes' => ['default' => '100px'],
                             'alt' => $product->title,

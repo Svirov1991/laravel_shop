@@ -4,9 +4,13 @@
             <div class="col-md-4">
                 <div class="product-thumb">
                     <a href="{{ Route('single-item', [ $product->category->slug, $product->slug ]) }}">
+                        @php
+                            $images = json_decode($product->images);
+                            $image_thumbnails = json_decode($product->image_thumbnails);
+                        @endphp
                         {!! getImage( [
-                    'image' => json_decode($product->images)[0] ?? null,
-                    'thumbnails' => json_decode($product->image_thumbnails)[0] ?? [],
+                    'image' => ( is_array( $images ) ) ? $images[0] ?? null : null,
+                    'thumbnails' => ( is_array( $image_thumbnails ) ) ? $image_thumbnails[0] ?? [] : [],
                     'main_size' => 370,
                     'sizes' => [ 767 => 100, 1200 => 33, 'default' => '370px'],
                     'alt' => $product->title,
@@ -38,11 +42,11 @@
                         <div class="product-action">
                             <div class="addto-wrap">
                                 @if( $product->isPublished() )
-                                    <a class="add-cart" href="javascript:void(0);" onclick="addToCart({{ $product->id }});">
+                                    <a class="add-cart" href="javascript:void(0);"  role="button" onclick="addToCart({{ $product->id }});">
                                         <i class="zmdi zmdi-shopping-cart-plus icon"></i>
                                     </a>
                                 @endif
-                                <a class="add-wishlist @if( isFavorites( $product->id ))active @endif" href="javascript:void(0);" onclick="toogleFavorit({{ $product->id }}, this );">
+                                <a class="add-wishlist @if( isFavorites( $product->id ))active @endif" href="javascript:void(0);"  role="button" onclick="toogleFavorit({{ $product->id }}, this );">
                                     <i class="zmdi zmdi-favorite-outline zmdi-hc-fw icon"></i>
                                 </a>
                             </div>
