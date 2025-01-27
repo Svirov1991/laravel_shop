@@ -136,8 +136,8 @@
                                     <div class="col-md-4">
                                         <div class="img-container">
                                             @php
-                                                $images = json_decode($product->images);
-                                                $image_thumbnails = json_decode($product->image_thumbnails);
+                                                $images = json_decode($product->images ?? '');
+                                                $image_thumbnails = json_decode($product->image_thumbnails ?? '');
                                             @endphp
                                             {!! getImage( [
                                             'image' => ( is_array( $images ) ) ? $images[0] ?? null : null,
@@ -152,9 +152,9 @@
                                     <!-- Правая часть: Текст и селект -->
                                     <div class="col-md-8">
                                         <h5 class="mb-3"> {{ $product->title }}</h5>
-                                        <div><p>{{ __('messages.count') }}: {{ $product->cart->count }} шт.</p></div>
+                                        <div><p><b>{{ __('messages.count') }}:</b> {{ $product->cart->count }} шт.</p></div>
                                         <div>
-                                            <p>{{ __('messages.order_product_price') }}:
+                                            <p><b>{{ __('messages.order_product_price') }}:</b>
                                                 {{ $product->cart->price }}
                                                 @if( !empty($product->cart->currency ) )
                                                     {{ $product->cart->currency}}
@@ -162,15 +162,21 @@
                                             </p>
                                         </div>
                                         <div>
-                                            <p>{{ __('messages.product_price') }}:
-                                                @if( !empty($product->discount_price) && $product->discount_price < $product->price)
-                                                    {{ $product->discount_price }}
-                                                @else
-                                                    {{ $product->price }}
-                                                @endif
-                                                {{ $product->currencyId->code }}
+                                            @if( method_exists( $product, 'getPrice' ))
+                                            <p><b>{{ __('messages.product_price') }}:</b>
+                                                {{ $product->getPrice() }}
+                                                {{ $product->currencyId->code ?? '' }}
                                             </p>
+                                            @endif
                                         </div>
+                                        @if( !empty($product->w_price))
+                                            <div>
+                                                <p><b>{{ __('messages.product_wholesale_price') }}:</b>
+                                                    {{ $product->w_price ?? '' }}
+                                                    {{ $product->currencyId->code ?? '' }}
+                                                </p>
+                                            </div>
+                                        @endif
                                         @if( !empty( $product->cart->attributes_html ) && is_array( $product->cart->attributes_html ) )
                                             @foreach($product->cart->attributes_html as $attribute)
                                                 {!! $attribute !!}

@@ -9,6 +9,10 @@ class Recaptcha implements Rule
 {
     public function passes($attribute, $value)
     {
+        $secret_key = config('services.recaptcha.secret_key');
+        if( empty( $secret_key )){
+            return true;
+        }
         $client = new Client();
         $response = $client->post('https://www.google.com/recaptcha/api/siteverify', [
             'form_params' => [

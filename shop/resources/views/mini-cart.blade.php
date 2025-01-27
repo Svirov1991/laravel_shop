@@ -38,8 +38,8 @@
                         @endforeach
                         <input type="hidden" name="count" value="{{ $product->cart->count }}">
                         <span class="product-quantity">{{ $product->cart->count }} ×</span>
-                        @if( $product->getPrice() )
-                            <span class="product-price">{{ $product->getPrice() }} {{ $product->getCurrencySymbol() }}</span>
+                        @if( $product->getUserPrice() )
+                            <span class="product-price">{{ $product->getUserPrice() }} {{ $product->getCurrencySymbol() }}</span>
                         @endif
                         <a class="cart-trash" href="javascript:void(0);" role="button" onclick="removeFromCart( '{{ $product->cart->key }}' )"><i class="fa fa-trash"></i></a>
                     </div>

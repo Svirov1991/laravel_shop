@@ -72,13 +72,13 @@
                                                             </div>
                                                         @endforeach
                                                 </td>
-                                                <td class="indecor-product-price">{{ $product->getPrice() }} {{ $product->getCurrencySymbol() }}</td>
+                                                <td class="indecor-product-price">{{ $product->getUserPrice() }} {{ $product->getCurrencySymbol() }}</td>
                                                 <td class="indecor-product-quantity">
                                                     <div class="pro-qty">
                                                         <input name="count" type="text" title="Quantity" class="product-quantity" value="{{ $product->cart->count }}" onchange="changeAttribute( '{{ $product->cart->key }}', this )" readonly>
                                                     </div>
                                                 </td>
-                                                <td class="product-subtotal"><span class="price">{!! $product->getPrice() * $product->cart->count !!} {{ $product->getCurrencySymbol() }}</span></td>
+                                                <td class="product-subtotal"><span class="price">{!! $product->getUserPrice() * $product->cart->count !!} {{ $product->getCurrencySymbol() }}</span></td>
                                             </tr>
                                     @endforeach
                                     </tbody>

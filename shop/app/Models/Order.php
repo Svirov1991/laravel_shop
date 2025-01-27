@@ -9,8 +9,12 @@ use App\Models\Product;
 class Order extends Model
 {
     use HasFactory;
-    protected $fillable = ['cart', 'total_price', 'first_name', 'last_name', 'phone', 'shipping'];
+    protected $fillable = ['cart', 'total_price', 'first_name', 'last_name', 'phone', 'shipping', 'status'];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     public function getProducts()
     {
         $cart = json_decode( $this->cart );
@@ -31,9 +35,12 @@ class Order extends Model
             })->keyBy('id');
         }
 
-        foreach ( $keys as $key ) {
-            if( !isset( $product[ $key ] ) ) {
-                $product[] = 'Product id ' . $key . ' not found';
+        foreach ($keys as $key) {
+            if ( ! isset($product[$key])) {
+                $product[$key] = (object) [
+                    'title' => __('messages.product_not_found'),
+                    'cart'  => $cart_items[$key],
+                ];
             }
         }
 

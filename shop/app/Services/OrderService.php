@@ -20,10 +20,10 @@ class OrderService
         foreach ($cartProducts as $item) {
             $telegram_message .= "\xE2\x9C\x85 <b>Товар: </b>" . $item->title . " ( " . $item->cart->count ." од. ) \n";
             $cartProduct           = $item->cart;
-            $cartProduct->price    = $item->getPrice();
+            $cartProduct->price    = $item->getUserPrice();
             $cartProduct->currency = $item->getCurrencySymbol();
             $cart_attributes = $cartProduct->attributes;
-            $telegram_message .= "<b>Вартість:</b> " . $item->getPrice() . $item->getCurrencySymbol() . " ( Усього " . $item->getPrice() *  $item->cart->count . $item->getCurrencySymbol() . ") \n";
+            $telegram_message .= "<b>Вартість:</b> " . $item->getUserPrice() . $item->getCurrencySymbol() . " ( Усього " . $item->getUserPrice() *  $item->cart->count . $item->getCurrencySymbol() . ") \n";
 
             foreach ($item->getPrimeAttributesData() as $primeAttribute) {
                 $cart_attribute = isset($cart_attributes[$primeAttribute->id]) ? $cart_attributes[$primeAttribute->id] : null;
@@ -57,7 +57,11 @@ class OrderService
         $order->settlement      = $request['settlement'];
         $order->office_code     = $request['office_code'];
         $order->office          = $request['office'];
+        if (auth()->check()) {
+            $order->user_id = auth()->id();
+        }
         $order->save();
+
         if( $order ){
             $telegram_message .= "\xF0\x9F\x92\xB5 <b>Загальна вартість замовлення: </b> " . $cartService->getTotalPrice() . $currency->symbol . "\n\n";
 

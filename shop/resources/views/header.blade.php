@@ -57,31 +57,36 @@
     <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    @php
+        $recaptcha_site_key = config('services.recaptcha.site_key');
+    @endphp
+    @if( !empty($recaptcha_site_key))
+        <script
+            src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
+        <script>
+            document.addEventListener( 'DOMContentLoaded', function () {
+                // Привязка обработчика к событиям отправки форм
+                document.querySelectorAll( 'form.recaptcha' ).forEach( function ( form ) {
+                    form.addEventListener( 'submit', function ( e ) {
+                        e.preventDefault();
 
-    <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
-    <script>
-		document.addEventListener('DOMContentLoaded', function () {
-			// Привязка обработчика к событиям отправки форм
-			document.querySelectorAll('form.recaptcha').forEach(function (form) {
-				form.addEventListener('submit', function (e) {
-					e.preventDefault();
+                        let recaptchaField = form.querySelector( 'input[name="recaptcha_token"]' ); // Найти скрытое поле
+                        if ( !recaptchaField ) {
+                            console.error( 'reCAPTCHA field not found in form:', form.id );
+                            return;
+                        }
 
-					let recaptchaField = form.querySelector('input[name="recaptcha_token"]'); // Найти скрытое поле
-					if (!recaptchaField) {
-						console.error('reCAPTCHA field not found in form:', form.id);
-						return;
-					}
-
-					grecaptcha.ready(function () {
-						grecaptcha.execute('{{ config('services.recaptcha.site_key') }}', { action: form.id }).then(function (token) {
-							recaptchaField.value = token;
-							form.submit();
-						});
-					});
-				});
-			});
-		});
-    </script>
+                        grecaptcha.ready( function () {
+                            grecaptcha.execute( '{{ config('services.recaptcha.site_key') }}', {action: form.id} ).then( function ( token ) {
+                                recaptchaField.value = token;
+                                form.submit();
+                            } );
+                        } );
+                    } );
+                } );
+            } );
+        </script>
+    @endif
 </head>
 
 <body>
@@ -118,6 +123,9 @@
                 <div class="col-5 col-sm-7 col-lg-2 d-sm-block text-end">
                     <div class="header-action-area">
                         <ul class="header-action">
+                            <li class="account-menu">
+                                <a class="action-item @if( auth()->check() ) active @endif" @if( auth()->check() ) href="{{ Route('profile') }}" @else href="{{ Route('login') }}" @endif ><i class="zmdi zmdi-account icon"></i></a>
+                            </li>
                             <li class="currency-menu">
                                 @include('currency-menu')
                             </li>

@@ -1170,6 +1170,9 @@ section .container-fluid {
 .header-action-area .header-action li .action-item:hover {
   color: #f76b6a;
 }
+.header-action-area .header-action li .action-item:hover, .header-action-area .header-action li .action-item.active{
+    color: #f76b6a;
+}
 .header-action-area .header-action li.search-item .action-item {
   width: 31px;
 }

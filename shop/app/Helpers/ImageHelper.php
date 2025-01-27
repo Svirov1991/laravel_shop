@@ -73,7 +73,12 @@ if ( ! function_exists('getImage')) {
         $image      = (empty($data['image'])) ? '' : $data['image'];
 
         if (empty($thumbnails) && empty($image)) {
-            return '';
+            $class = '';
+            if ( ! empty($data['class'])) {
+                $class = " class='{$data['class']}'";
+            }
+
+            return '<img src="/assets/img/no-image.svg" ' . $class . '>';
         }
         $sizes = (empty($data['sizes'])) ? [] : $data['sizes'];
 
