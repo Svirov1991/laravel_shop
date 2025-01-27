@@ -38,7 +38,7 @@ class ShopController extends Controller
                 $products->orderBy('new', 'desc');
                 $products->orderBy('created_at', 'desc');
         }
-        $products = $products->paginate(1);
+        $products = $products->paginate(9);
 
         $attributes  = Attribute::with('values')->get();
         $breadcrumbs = [
