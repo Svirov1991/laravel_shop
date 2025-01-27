@@ -29,7 +29,7 @@
                         @endforeach
                     @endif
                 @endforeach
-                <span class="price">{!! $product->getPrice() * $product->cart->count !!} {{ $product->getCurrencySymbol() }}</span>
+                <span class="price">{!! $product->getUserPrice() * $product->cart->count !!} {{ $product->getCurrencySymbol() }}</span>
             </div>
         </div>
 @endforeach

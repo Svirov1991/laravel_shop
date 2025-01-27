@@ -35,7 +35,8 @@ class Product extends Model
             'featured',
             'new',
             'created_at',
-            'updated_at'
+            'updated_at',
+            'w_price'
         ];
 
     protected static function booted()
@@ -89,6 +90,29 @@ class Product extends Model
         }
 
         return $currency->calculatePrice($this->price, $this->currency_id);
+    }
+
+    public function getWPrice()
+    {
+        $currency = app(CurrencyService::class);
+        $price    = (int)$this->w_price;
+        if ( ! empty($price) && auth()->check()
+             && auth()->user()->isWholesaler()
+        ) {
+            return $currency->calculatePrice($price, $this->currency_id);
+        }
+
+        return false;
+    }
+
+    public function getUserPrice()
+    {
+        $price = $this->getWPrice();
+        if ( ! $price) {
+            $price = $this->getPrice();
+        }
+
+        return $price;
     }
 
     public function getCurrencySymbol()

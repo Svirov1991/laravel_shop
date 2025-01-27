@@ -56,7 +56,7 @@ class CartService
                 'attributeValues',
                 'category'
             )->get()->filter(function ($product) {
-                return ! empty($product->getPrice());
+                return ! empty($product->getUserPrice());
             })->keyBy('id');
         }
         $cart_products = [];
@@ -86,7 +86,7 @@ class CartService
         $totalPrice = 0;
         $products   = $this->getCartProducts();
         foreach ($products as $item) {
-            $totalPrice += $item->getPrice() * (int)$item->cart->count;
+            $totalPrice += $item->getUserPrice() * (int)$item->cart->count;
         }
 
         return $totalPrice;
@@ -192,7 +192,7 @@ class CartService
         if (empty($product)) {
             return ['message' => __('messages.something_went_wrong'), 'code' => 500];
         }
-        $price          = $product->getPrice();
+        $price          = $product->getUserPrice();
 
         $count          = $data['count'] ?? 1;
 
