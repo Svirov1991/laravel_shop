@@ -9,7 +9,7 @@
                         <div class="about-widget">
                             <div class="footer-logo-area">
                                 <a href="{{ Route('home') }}">
-                                    <img class="logo-main" src="/storage/{{ setting('site.logo') }}" alt="Logo" />
+                                    <img class="logo-main" src="{{ url('storage/' .  setting('site.logo')) }}" alt="Logo" />
                                 </a>
                             </div>
                             <p class="desc">{{ setting('site.description') }}</p>

@@ -69,6 +69,8 @@ class OrderRequest extends FormRequest
             'office.required' => __('messages.validator.office_required'),
             'office.string' => __('messages.validator.office_string'),
             'office.max' => __('messages.validator.office_max'),
+
+            'recaptcha_token.required' => __('messages.reCAPTCHA_failed'),
         ];
     }
 }

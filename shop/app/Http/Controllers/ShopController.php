@@ -14,17 +14,40 @@ class ShopController extends Controller
 
     public function index( $category )
     {
+        $request = request();
+        $sort = $request->get('sort', 'new');
         $products = $category->products()->whereIn(
             'status',
             ['PUBLISHED', 'NOT_AVAILABlE']
-        )->with('attributeValues', 'category')->orderBy('status')->paginate(9);
+        )->with('attributeValues', 'category');
+        switch ($sort) {
+            case 'price-asc':
+                $products->orderByRaw('COALESCE(discount_price, price) ASC');
+                break;
+            case 'price-desc':
+                $products->orderByRaw('COALESCE(discount_price, price) DESC');
+                break;
+            case 'rating':
+                $products->orderBy('rating', 'desc');
+                break;
+            case 'new':
+                $products->orderBy('new', 'desc');
+                $products->orderBy('created_at', 'desc');
+                break;
+            default:
+                $products->orderBy('new', 'desc');
+                $products->orderBy('created_at', 'desc');
+        }
+        $products = $products->paginate(1);
+
         $attributes  = Attribute::with('values')->get();
         $breadcrumbs = [
             ['name' => __('messages.main'), 'url' => route('home')],
             ['name' => $category->title, 'url' => route('handle-slug', $category->slug)],
         ];
         $metaTags = \App\Services\MetaTagsService::prepareMetaTags( $category );
-        return view('shop', compact('products', 'attributes', 'breadcrumbs', 'metaTags' ));
+        return response()
+            ->view('shop', compact('products', 'attributes', 'breadcrumbs', 'metaTags' ));
     }
 
     public function product( $category, $product_slug )
@@ -44,8 +67,7 @@ class ShopController extends Controller
             ['name' => $category->title, 'url' => route('handle-slug', $product->category->slug)],
             ['name' => $product->title, 'url' => route('single-item', [$product->category->slug, $product->slug])],
         ];
-        //$metaTags = \App\Services\MetaTagsService::prepareMetaTags( $product );
-        $metaTags = [];
+        $metaTags = \App\Services\MetaTagsService::prepareMetaTags( $product );
         return view('product', compact('product', 'relatedProducts', 'breadcrumbs', 'metaTags' ));
     }
 

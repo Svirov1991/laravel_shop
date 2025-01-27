@@ -34,7 +34,7 @@ class Orders extends WebhookHandler
         )->send();
     }
 
-    static function sendMessageAdmin(string $message): void
+    static function sendMessageAdmin(string $message, $keyboard = []): void
     {
         $token = config('telegraph.orders_bot_token');
         if ( ! $token) {
@@ -48,9 +48,13 @@ class Orders extends WebhookHandler
             )->url(
                 setting('site.logo')
             );
-            app(Telegraph::class)->bot($bot)->chat($chat_id)->photo(
+            $tg = app(Telegraph::class)->bot($bot)->chat($chat_id)->photo(
                 $logo
-            )->html($message)->send();
+            );
+            if( !empty($keyboard) ) {
+                $tg->keyboard( Keyboard::make()->buttons($keyboard) );
+            }
+            $tg->html( $message )->send();
         }
     }
 }

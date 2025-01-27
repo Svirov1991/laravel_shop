@@ -27,6 +27,20 @@
                             </div>
                             <div class="nav-short-area d-md-flex align-items-center">
                                 <p class="show-product">{{ __('messages.showing') }} {{ $products->firstItem() }} - {{ $products->lastItem() }} of {{ $products->total() }} {{ __('messages.result') }}</p>
+                                <div class="toolbar-shorter">
+                                    <label for="SortBy">{{ __('filters.sort-by') }}</label>
+                                    <form id="sort-form" action="{{ request()->url() }}" method="GET">
+                                        @foreach(request()->except('sort') as $key => $value)
+                                            <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                                        @endforeach
+                                        <select id="SortBy" name="sort" class="form-select" aria-label="Sort by" onchange="document.getElementById('sort-form').submit();">
+                                            <option value="new" {{ request('sort') === 'new' ? 'selected' : '' }}>{{ __('filters.new') }}</option>
+                                            <option value="price-asc" {{ request('sort') === 'price-asc' ? 'selected' : '' }}>{{ __('filters.price-asc') }}</option>
+                                            <option value="price-desc" {{ request('sort') === 'price-desc' ? 'selected' : '' }}>{{ __('filters.price-desc') }}</option>
+                                            <option value="rating" {{ request('sort') === 'rating' ? 'selected' : '' }}>{{ __('filters.rating') }}</option>
+                                        </select>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                         <div class="product-body-wrap">

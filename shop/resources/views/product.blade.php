@@ -100,6 +100,9 @@
                                                 @if( $product->getOldPrice() )
                                                     <span class="price-old">{{ $product->getOldPrice() }} {{ $product->getCurrencySymbol() }}</span>
                                                 @endif
+                                                @if( $product->getWPrice() )
+                                                    <div><b>{{ __('messages.w-price') }} <span class="price price-w">{{ $product->getWPrice() }} {{ $product->getCurrencySymbol() }}</span></b></div>
+                                                @endif
                                             @else
                                                 <span>{{ __('messages.not_available') }}</span>
                                             @endif

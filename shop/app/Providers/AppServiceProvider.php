@@ -13,12 +13,14 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Services\CartService;
 use App\Services\CurrencyService;
-use TCG\Voyager\Events\BreadDataAdded;
-use Illuminate\Support\Facades\Event;
-use App\Listeners\ProcessProductImages;
+//use App\Listeners\ProcessProductImages;
 use TCG\Voyager\Facades\Voyager;
 use TCG\Voyager\Models\Setting;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Auth\Notifications\VerifyEmail;
+use App\Notifications\CustomVerifyEmail;
+use App\Notifications\ResetPasswordNotification;
+use Illuminate\Auth\Notifications\ResetPassword;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -119,6 +121,14 @@ class AppServiceProvider extends ServiceProvider
                     }
                 }
             }
+        });
+
+        VerifyEmail::toMailUsing(function ($notifiable, $url) {
+            return (new CustomVerifyEmail())->toMail($notifiable);
+        });
+
+        ResetPassword::toMailUsing(function ($notifiable, $token) {
+            return (new ResetPasswordNotification($token))->toMail($notifiable);
         });
 
         //Event::listen(BreadDataAdded::class, ProcessProductImages::class);
