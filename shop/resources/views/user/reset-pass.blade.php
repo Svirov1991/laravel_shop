@@ -25,7 +25,7 @@
                                     @endif
                                 </div>
 
-                                <form method="POST" action="{{ route('password.update') }}">
+                                <form id="password_update" method="POST" action="{{ route('password.update') }}" class="recaptcha">
                                     @csrf
                                     <input type="hidden" name="token" value="{{ $token }}">
                                     <input type="hidden" name="recaptcha_token" value="recaptcha_token" >

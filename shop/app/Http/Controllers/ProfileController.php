@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileRequest;
 use App\Models\User;
+use App\Rules\Recaptcha;
 use DefStudio\Telegraph\Keyboard\Button;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
@@ -96,12 +97,14 @@ class ProfileController extends Controller
     public function updateAvatar(Request $request)
     {
         $request->validate([
-            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'recaptcha_token' => ['required', new Recaptcha()],
+            'avatar'          => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ], [
-            'avatar.required' => __('messages.validator.avatar_required'),
-            'avatar.image' => __('messages.validator.avatar_image'),
-            'avatar.mimes' => __('messages.validator.avatar_mimes'),
-            'avatar.max' => __('messages.validator.avatar_max'),
+            'avatar.required'          => __('messages.validator.avatar_required'),
+            'avatar.image'             => __('messages.validator.avatar_image'),
+            'avatar.mimes'             => __('messages.validator.avatar_mimes'),
+            'avatar.max'               => __('messages.validator.avatar_max'),
+            'recaptcha_token.required' => __('messages.reCAPTCHA_failed'),
         ]);
 
         $user = auth()->user();

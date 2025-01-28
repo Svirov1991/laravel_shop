@@ -21,7 +21,7 @@
                                         </div>
                                     @endif
                                 </div>
-                                <form method="POST" action="{{ route('register-save') }}">
+                                <form id="register_save" class="recaptcha" method="POST" action="{{ route('register-save') }}">
                                     @csrf
                                     <input type="hidden" name="recaptcha_token" value="recaptcha_token" >
                                     <div class="row">
