@@ -46,7 +46,9 @@ The application provides for work with 2 telegram bots
   information from the fields in the settings).
 - Bot for informing the Admin about new orders.
 
-To register bots, you will need to run the command "php artisan telegraph:new-bot" and then enter the bot token
+Creating bot https://docs.defstudio.it/telegraph/v1/quickstart/new-bot
+To register bots, you will need to run the command "php artisan telegraph:new-bot" and then enter the bot token ( https://docs.defstudio.it/telegraph/v1/quickstart/register-new-bot )
+To setting a webhook, you will need to run the command "php artisan telegraph:set-webhook {bot_id}" ( https://docs.defstudio.it/telegraph/v1/quickstart/setting-webhook )
 
 **You also need to specify bot tokens in .env**
 
