@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `attribute_values`;
 CREATE TABLE `attribute_values` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `attribute_id` bigint unsigned NOT NULL,
-  `value` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `attribute_values_attribute_id_foreign` (`attribute_id`),
   CONSTRAINT `attribute_values_attribute_id_foreign` FOREIGN KEY (`attribute_id`) REFERENCES `attributes` (`id`) ON DELETE CASCADE
@@ -51,7 +51,7 @@ DROP TABLE IF EXISTS `attributes`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `attributes` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `prime` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -78,8 +78,8 @@ CREATE TABLE `categories` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `parent_id` int unsigned DEFAULT NULL,
   `order` int NOT NULL DEFAULT '1',
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -108,8 +108,8 @@ DROP TABLE IF EXISTS `currencies`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `currencies` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `symbol` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `symbol` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `rate` decimal(10,4) NOT NULL,
   `is_default` tinyint(1) NOT NULL DEFAULT '0',
   `active` tinyint(1) NOT NULL DEFAULT '0',
@@ -140,21 +140,21 @@ DROP TABLE IF EXISTS `data_rows`;
 CREATE TABLE `data_rows` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `data_type_id` int unsigned NOT NULL,
-  `field` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `display_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `field` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `display_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `required` tinyint(1) NOT NULL DEFAULT '0',
   `browse` tinyint(1) NOT NULL DEFAULT '1',
   `read` tinyint(1) NOT NULL DEFAULT '1',
   `edit` tinyint(1) NOT NULL DEFAULT '1',
   `add` tinyint(1) NOT NULL DEFAULT '1',
   `delete` tinyint(1) NOT NULL DEFAULT '1',
-  `details` text COLLATE utf8mb4_unicode_ci,
+  `details` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `order` int NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `data_rows_data_type_id_foreign` (`data_type_id`),
   CONSTRAINT `data_rows_data_type_id_foreign` FOREIGN KEY (`data_type_id`) REFERENCES `data_types` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=161 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=168 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -163,7 +163,7 @@ CREATE TABLE `data_rows` (
 
 LOCK TABLES `data_rows` WRITE;
 /*!40000 ALTER TABLE `data_rows` DISABLE KEYS */;
-INSERT INTO `data_rows` VALUES (1,1,'id','number','ID',1,0,0,0,0,0,NULL,1),(2,1,'name','text','Name',1,1,1,1,1,1,NULL,2),(3,1,'email','text','Email',1,1,1,1,1,1,NULL,3),(4,1,'password','password','Password',1,0,0,1,1,0,NULL,4),(5,1,'remember_token','text','Remember Token',0,0,0,0,0,0,NULL,5),(6,1,'created_at','timestamp','Created At',0,1,1,0,0,0,NULL,6),(7,1,'updated_at','timestamp','Updated At',0,0,0,0,0,0,NULL,7),(8,1,'avatar','image','Avatar',0,1,1,1,1,1,NULL,8),(9,1,'user_belongsto_role_relationship','relationship','Role',0,1,1,1,1,0,'{\"model\":\"TCG\\\\Voyager\\\\Models\\\\Role\",\"table\":\"roles\",\"type\":\"belongsTo\",\"column\":\"role_id\",\"key\":\"id\",\"label\":\"display_name\",\"pivot_table\":\"roles\",\"pivot\":0}',10),(10,1,'user_belongstomany_role_relationship','relationship','Roles',0,1,1,1,1,0,'{\"model\":\"TCG\\\\Voyager\\\\Models\\\\Role\",\"table\":\"roles\",\"type\":\"belongsToMany\",\"column\":\"id\",\"key\":\"id\",\"label\":\"display_name\",\"pivot_table\":\"user_roles\",\"pivot\":\"1\",\"taggable\":\"0\"}',11),(11,1,'settings','hidden','Settings',0,0,0,0,0,0,NULL,12),(12,2,'id','number','ID',1,0,0,0,0,0,NULL,1),(13,2,'name','text','Name',1,1,1,1,1,1,NULL,2),(14,2,'created_at','timestamp','Created At',0,0,0,0,0,0,NULL,3),(15,2,'updated_at','timestamp','Updated At',0,0,0,0,0,0,NULL,4),(16,3,'id','number','ID',1,0,0,0,0,0,NULL,1),(17,3,'name','text','Name',1,1,1,1,1,1,NULL,2),(18,3,'created_at','timestamp','Created At',0,0,0,0,0,0,NULL,3),(19,3,'updated_at','timestamp','Updated At',0,0,0,0,0,0,NULL,4),(20,3,'display_name','text','Display Name',1,1,1,1,1,1,NULL,5),(21,1,'role_id','text','Role',1,1,1,1,1,1,NULL,9),(22,4,'id','number','ID',1,0,0,0,0,0,'{}',1),(23,4,'parent_id','select_dropdown','Parent',0,0,1,1,1,1,'{\"default\":\"\",\"null\":\"\",\"options\":{\"\":\"-- None --\"},\"relationship\":{\"key\":\"id\",\"label\":\"name\"}}',2),(24,4,'order','text','Order',1,1,1,1,1,1,'{\"default\":1}',3),(25,4,'name','text','Name',1,1,1,1,1,1,'{}',4),(26,4,'slug','text','Slug',1,1,1,1,1,1,'{\"slugify\":{\"origin\":\"name\"}}',5),(27,4,'created_at','timestamp','Created At',0,0,1,0,0,0,'{}',6),(28,4,'updated_at','timestamp','Updated At',0,0,0,0,0,0,'{}',7),(29,5,'id','number','ID',1,0,0,0,0,0,'{}',1),(30,5,'author_id','text','Author',1,0,1,1,0,1,'{}',2),(31,5,'category_id','text','Category',0,0,1,1,1,0,'{}',3),(32,5,'title','text','Title',1,1,1,1,1,1,'{}',4),(33,5,'excerpt','text_area','Excerpt',0,0,1,1,1,1,'{}',5),(34,5,'body','rich_text_box','Body',1,0,1,1,1,1,'{}',6),(35,5,'image','image','Post Image',0,1,1,1,1,1,'{\"resize\":{\"width\":\"1000\",\"height\":\"null\"},\"quality\":\"70%\",\"upsize\":true,\"thumbnails\":[{\"name\":\"medium\",\"scale\":\"50%\"},{\"name\":\"small\",\"scale\":\"25%\"},{\"name\":\"cropped\",\"crop\":{\"width\":\"300\",\"height\":\"250\"}}]}',7),(36,5,'slug','text','Slug',1,0,1,1,1,1,'{\"slugify\":{\"origin\":\"title\",\"forceUpdate\":true},\"validation\":{\"rule\":\"unique:posts,slug\"}}',8),(39,5,'status','select_dropdown','Status',1,1,1,1,1,1,'{\"default\":\"DRAFT\",\"options\":{\"PUBLISHED\":\"published\",\"DRAFT\":\"draft\",\"PENDING\":\"pending\"}}',11),(40,5,'created_at','timestamp','Created At',0,1,1,0,0,0,'{}',12),(41,5,'updated_at','timestamp','Updated At',0,0,0,0,0,0,'{}',13),(43,5,'featured','checkbox','Featured',1,1,1,1,1,1,'{}',15),(44,6,'id','number','ID',1,0,0,0,0,0,NULL,1),(45,6,'author_id','text','Author',1,0,0,0,0,0,NULL,2),(46,6,'title','text','Title',1,1,1,1,1,1,NULL,3),(47,6,'excerpt','text_area','Excerpt',1,0,1,1,1,1,NULL,4),(48,6,'body','rich_text_box','Body',1,0,1,1,1,1,NULL,5),(49,6,'slug','text','Slug',1,0,1,1,1,1,'{\"slugify\":{\"origin\":\"title\"},\"validation\":{\"rule\":\"unique:pages,slug\"}}',6),(52,6,'status','select_dropdown','Status',1,1,1,1,1,1,'{\"default\":\"INACTIVE\",\"options\":{\"INACTIVE\":\"INACTIVE\",\"ACTIVE\":\"ACTIVE\"}}',9),(53,6,'created_at','timestamp','Created At',1,1,1,0,0,0,NULL,10),(54,6,'updated_at','timestamp','Updated At',1,0,0,0,0,0,NULL,11),(55,6,'image','image','Page Image',0,1,1,1,1,1,NULL,12),(56,9,'id','text','Id',1,0,0,0,0,0,'{}',1),(57,9,'title','text','Title',1,1,1,1,1,1,'{\"display\":{\"width\":\"10\"}}',2),(58,9,'slug','text','Slug',1,1,1,1,1,1,'{\"slugify\":{\"origin\":\"title\"},\"validation\":{\"rule\":\"unique:product_categories,slug\"}}',4),(59,9,'description','markdown_editor','Description',0,1,1,1,1,1,'{}',5),(60,9,'created_at','timestamp','Created At',0,1,1,1,0,1,'{}',7),(61,9,'updated_at','timestamp','Updated At',0,0,0,0,0,0,'{}',8),(80,13,'id','text','Id',1,0,0,0,0,0,'{}',1),(81,13,'name','text','Name',1,1,1,1,1,1,'{}',2),(82,15,'id','text','Id',1,0,0,0,0,0,'{}',1),(83,15,'attribute_id','select_dropdown','Attribute',1,0,1,1,1,1,'{\"display\":{\"width\":\"4\"},\"relationship\":{\"key\":\"id\",\"label\":\"name\",\"table\":\"attributes\"}}',3),(84,15,'value','text','Value',1,1,1,1,1,1,'{\"display\":{\"width\":\"8\"}}',4),(86,15,'attribute_value_hasone_attribute_relationship','relationship','Attribute',0,1,0,0,0,0,'{\"model\":\"App\\\\Models\\\\Attribute\",\"table\":\"attributes\",\"type\":\"hasOne\",\"column\":\"id\",\"key\":\"attribute_id\",\"label\":\"name\",\"pivot_table\":\"attribute_values\",\"pivot\":\"0\",\"taggable\":\"0\"}',2),(87,17,'id','text','Id',1,0,0,0,0,0,'{}',1),(88,17,'title','text','Title',1,1,1,1,1,1,'{}',2),(89,17,'description','rich_text_box','Description',0,0,1,1,1,1,'{}',3),(90,17,'image','media_picker','Image',1,1,1,1,1,1,'{}',6),(91,17,'created_at','timestamp','Created At',0,0,1,1,0,1,'{}',7),(92,17,'updated_at','timestamp','Updated At',0,0,0,0,0,0,'{}',8),(93,9,'image','media_picker','Image',0,1,1,1,1,1,'{}',6),(95,18,'id','text','Id',1,1,0,0,0,0,'{}',1),(96,18,'cart','text','Cart',0,0,1,1,0,1,'{}',3),(97,18,'total_price','text','Total Price',0,1,1,1,0,1,'{}',4),(98,18,'first_name','text','First Name',0,1,1,1,0,1,'{}',6),(99,18,'last_name','text','Last Name',0,1,1,1,1,1,'{}',7),(100,18,'phone','text','Phone',1,1,1,1,0,1,'{}',8),(101,18,'email','text','Email',0,0,1,1,0,1,'{}',9),(102,18,'settlement_code','text','Settlement Code',0,0,1,1,0,1,'{}',10),(103,18,'settlement','text','Settlement',0,0,1,1,0,1,'{}',11),(104,18,'office_code','text','Office Code',0,0,1,1,0,1,'{}',12),(105,18,'office','text','Office',0,0,1,1,0,1,'{}',13),(106,18,'created_at','timestamp','Created At',0,0,1,0,0,1,'{}',14),(107,18,'updated_at','timestamp','Updated At',0,0,0,0,0,0,'{}',15),(110,19,'id','text','Id',1,0,0,0,0,0,'{}',1),(111,19,'code','text','Code',1,1,1,1,1,1,'{}',2),(112,19,'symbol','text','Symbol',1,1,1,1,1,1,'{}',3),(113,19,'rate','text','Rate',1,1,1,1,1,1,'{}',4),(114,19,'is_default','checkbox','Is Default',1,1,1,1,1,1,'{}',5),(115,19,'created_at','timestamp','Created At',0,1,1,1,0,1,'{}',7),(116,19,'updated_at','timestamp','Updated At',0,0,0,0,0,0,'{}',8),(117,18,'currency','text','Currency',0,1,1,1,1,1,'{}',5),(119,17,'button_link','text','Button Link',0,1,1,1,1,1,'{\"display\":{\"width\":\"6\"}}',5),(120,17,'button_text','text','Button Text',0,0,1,1,1,1,'{\"display\":{\"width\":\"6\"}}',4),(124,9,'featured','checkbox','Избранное',1,1,1,1,1,1,'{\"display\":{\"width\":\"2\"}}',3),(125,21,'id','text','Id',1,0,0,0,0,0,'{}',1),(126,21,'title','text','Title',1,1,1,1,1,1,'{\"display\":{\"width\":\"5\"}}',2),(127,21,'slug','text','Slug',1,0,1,1,1,1,'{\"display\":{\"width\":\"5\"},\"slugify\":{\"origin\":\"title\"},\"validation\":{\"rule\":\"unique:products,slug\"}}',3),(128,21,'description','rich_text_box','Description',0,0,1,1,1,1,'{}',14),(129,21,'full_description','rich_text_box','Full Description',0,0,1,1,1,1,'{}',15),(130,21,'size_chart','rich_text_box','Size Chart',0,0,1,1,1,1,'{}',16),(131,21,'images','media_picker','Images',0,0,1,1,1,1,'{\"max\":10,\"min\":1,\"expanded\":true,\"show_folders\":true,\"show_toolbar\":true,\"allow_upload\":true,\"allow_move\":true,\"allow_delete\":true,\"allow_create_folder\":true,\"allow_rename\":true,\"allow_crop\":true,\"allowed\":[],\"quality\":100,\"base_path\":\"\\/products\\/{pk}\\/\",\"thumbnails\":[{\"type\":\"resize\",\"name\":\"resize-300\",\"width\":300,\"upsize\":false},{\"type\":\"resize\",\"name\":\"resize-500\",\"width\":500,\"upsize\":false},{\"type\":\"resize\",\"name\":\"resize-800\",\"width\":800,\"upsize\":false},{\"type\":\"resize\",\"name\":\"resize-1200\",\"width\":1200,\"upsize\":false}]}',13),(132,21,'article','text','Article',0,0,1,1,1,1,'{\"display\":{\"width\":\"2\"}}',12),(133,21,'price','number','Price',1,1,1,1,1,1,'{\"display\":{\"width\":\"2\"}}',5),(134,21,'discount_price','number','Discount Price',0,1,1,1,1,1,'{\"display\":{\"width\":\"2\"}}',6),(135,21,'currency_id','select_dropdown','Currency Id',0,0,1,1,1,1,'{\"display\":{\"width\":\"2\"},\"relationship\":{\"key\":\"id\",\"label\":\"code\",\"table\":\"curencies\"}}',7),(136,21,'rating','number','Rating',0,0,1,1,1,1,'{\"display\":{\"width\":\"6\"}}',17),(137,21,'number_of_ratings','number','Number Of Ratings',0,0,1,1,1,1,'{\"display\":{\"width\":\"6\"}}',18),(138,21,'product_category_id','select_dropdown','Product Category Id',0,0,1,1,1,1,'{\"display\":{\"width\":\"2\"},\"relationship\":{\"key\":\"id\",\"label\":\"title\",\"table\":\"product_categories\"}}',4),(139,21,'status','select_dropdown','Status',1,1,1,1,1,1,'{\"display\":{\"width\":\"2\"},\"options\":{\"PUBLISHED\":\"PUBLISHED\",\"NOT_AVAILABLE\":\"NOT AVAILABLE\",\"DRAFT\":\"DRAFT\"}}',11),(140,21,'featured','checkbox','Featured',1,0,1,1,1,1,'{\"display\":{\"width\":\"1\"}}',9),(141,21,'new','checkbox','New',1,0,1,1,1,1,'{\"display\":{\"width\":\"1\"}}',10),(142,21,'created_at','timestamp','Created At',0,0,1,1,0,1,'{}',19),(143,21,'updated_at','timestamp','Updated At',0,0,0,0,0,0,'{}',20),(144,21,'product_hasone_currency_relationship','relationship','currencies',0,1,0,0,0,0,'{\"model\":\"App\\\\Models\\\\Currency\",\"table\":\"currencies\",\"type\":\"hasOne\",\"column\":\"id\",\"key\":\"currency_id\",\"label\":\"code\",\"pivot_table\":\"attribute_values\",\"pivot\":\"0\",\"taggable\":\"0\"}',8),(145,21,'product_hasone_product_category_relationship','relationship','product_categories',0,1,0,0,0,0,'{\"model\":\"App\\\\Models\\\\ProductCategory\",\"table\":\"product_categories\",\"type\":\"hasOne\",\"column\":\"id\",\"key\":\"product_category_id\",\"label\":\"title\",\"pivot_table\":\"attribute_values\",\"pivot\":\"0\",\"taggable\":\"0\"}',21),(147,21,'image_thumbnails','text','Image Thumbnails',0,0,0,0,0,0,'{}',10),(148,22,'id','text','Id',1,0,0,0,0,0,'{}',1),(149,22,'type','text','Type',1,1,1,1,1,1,'{}',2),(150,22,'first_name','text','First Name',0,1,1,1,1,1,'{}',3),(151,22,'last_name','text','Last Name',0,1,1,1,1,1,'{}',4),(152,22,'phone','text','Phone',0,1,1,1,1,1,'{}',5),(153,22,'email','text','Email',0,1,1,1,1,1,'{}',6),(154,22,'message','text_area','Message',0,0,1,1,1,1,'{}',7),(155,22,'data','text','Data',0,0,1,1,1,1,'{}',8),(156,22,'created_at','timestamp','Created At',0,1,1,1,0,1,'{}',9),(157,22,'updated_at','timestamp','Updated At',0,0,0,0,0,0,'{}',10),(158,13,'prime','checkbox','Prime',1,1,1,1,1,1,'{}',3),(159,19,'active','checkbox','Active',1,1,1,1,1,1,'{}',6),(160,18,'status','select_dropdown','Status',1,1,1,1,1,1,'{\"options\":{\"NEW\":\"NEW\",\"IN_PROCESSING\":\"IN_PROCESSING\",\"CLOSED\":\"CLOSED\",\"COMPLETED\":\"COMPLETED\"}}',2);
+INSERT INTO `data_rows` VALUES (1,1,'id','number','ID',1,0,0,0,0,0,'{}',1),(2,1,'name','text','Name',1,1,1,1,1,1,'{}',2),(3,1,'email','text','Email',1,1,1,1,1,1,'{}',4),(4,1,'password','password','Password',1,0,0,1,1,0,'{}',5),(5,1,'remember_token','text','Remember Token',0,0,0,0,0,0,'{}',6),(6,1,'created_at','timestamp','Created At',0,1,1,0,0,0,'{}',8),(7,1,'updated_at','timestamp','Updated At',0,0,0,0,0,0,'{}',9),(8,1,'avatar','image','Avatar',0,1,1,1,1,1,'{}',11),(9,1,'user_belongsto_role_relationship','relationship','Role',0,1,1,1,1,0,'{\"model\":\"TCG\\\\Voyager\\\\Models\\\\Role\",\"table\":\"roles\",\"type\":\"belongsTo\",\"column\":\"role_id\",\"key\":\"id\",\"label\":\"display_name\",\"pivot_table\":\"roles\",\"pivot\":\"0\",\"taggable\":\"0\"}',14),(10,1,'user_belongstomany_role_relationship','relationship','Roles',0,1,1,1,1,0,'{\"model\":\"TCG\\\\Voyager\\\\Models\\\\Role\",\"table\":\"roles\",\"type\":\"belongsToMany\",\"column\":\"id\",\"key\":\"id\",\"label\":\"display_name\",\"pivot_table\":\"user_roles\",\"pivot\":\"1\",\"taggable\":\"0\"}',15),(11,1,'settings','hidden','Settings',0,0,0,0,0,0,'{}',16),(12,2,'id','number','ID',1,0,0,0,0,0,NULL,1),(13,2,'name','text','Name',1,1,1,1,1,1,NULL,2),(14,2,'created_at','timestamp','Created At',0,0,0,0,0,0,NULL,3),(15,2,'updated_at','timestamp','Updated At',0,0,0,0,0,0,NULL,4),(16,3,'id','number','ID',1,0,0,0,0,0,NULL,1),(17,3,'name','text','Name',1,1,1,1,1,1,NULL,2),(18,3,'created_at','timestamp','Created At',0,0,0,0,0,0,NULL,3),(19,3,'updated_at','timestamp','Updated At',0,0,0,0,0,0,NULL,4),(20,3,'display_name','text','Display Name',1,1,1,1,1,1,NULL,5),(21,1,'role_id','text','Role',0,1,1,1,1,1,'{}',13),(22,4,'id','number','ID',1,0,0,0,0,0,'{}',1),(23,4,'parent_id','select_dropdown','Parent',0,0,1,1,1,1,'{\"default\":\"\",\"null\":\"\",\"options\":{\"\":\"-- None --\"},\"relationship\":{\"key\":\"id\",\"label\":\"name\"}}',2),(24,4,'order','text','Order',1,1,1,1,1,1,'{\"default\":1}',3),(25,4,'name','text','Name',1,1,1,1,1,1,'{}',4),(26,4,'slug','text','Slug',1,1,1,1,1,1,'{\"slugify\":{\"origin\":\"name\"}}',5),(27,4,'created_at','timestamp','Created At',0,0,1,0,0,0,'{}',6),(28,4,'updated_at','timestamp','Updated At',0,0,0,0,0,0,'{}',7),(29,5,'id','number','ID',1,0,0,0,0,0,'{}',1),(30,5,'author_id','text','Author',1,0,1,1,0,1,'{}',2),(31,5,'category_id','text','Category',0,0,1,1,1,0,'{}',3),(32,5,'title','text','Title',1,1,1,1,1,1,'{}',4),(33,5,'excerpt','text_area','Excerpt',0,0,1,1,1,1,'{}',5),(34,5,'body','rich_text_box','Body',1,0,1,1,1,1,'{}',6),(35,5,'image','image','Post Image',0,1,1,1,1,1,'{\"resize\":{\"width\":\"1000\",\"height\":\"null\"},\"quality\":\"70%\",\"upsize\":true,\"thumbnails\":[{\"name\":\"medium\",\"scale\":\"50%\"},{\"name\":\"small\",\"scale\":\"25%\"},{\"name\":\"cropped\",\"crop\":{\"width\":\"300\",\"height\":\"250\"}}]}',7),(36,5,'slug','text','Slug',1,0,1,1,1,1,'{\"slugify\":{\"origin\":\"title\",\"forceUpdate\":true},\"validation\":{\"rule\":\"unique:posts,slug\"}}',8),(39,5,'status','select_dropdown','Status',1,1,1,1,1,1,'{\"default\":\"DRAFT\",\"options\":{\"PUBLISHED\":\"published\",\"DRAFT\":\"draft\",\"PENDING\":\"pending\"}}',11),(40,5,'created_at','timestamp','Created At',0,1,1,0,0,0,'{}',12),(41,5,'updated_at','timestamp','Updated At',0,0,0,0,0,0,'{}',13),(43,5,'featured','checkbox','Featured',1,1,1,1,1,1,'{}',15),(44,6,'id','number','ID',1,0,0,0,0,0,NULL,1),(45,6,'author_id','text','Author',1,0,0,0,0,0,NULL,2),(46,6,'title','text','Title',1,1,1,1,1,1,NULL,3),(47,6,'excerpt','text_area','Excerpt',1,0,1,1,1,1,NULL,4),(48,6,'body','rich_text_box','Body',1,0,1,1,1,1,NULL,5),(49,6,'slug','text','Slug',1,0,1,1,1,1,'{\"slugify\":{\"origin\":\"title\"},\"validation\":{\"rule\":\"unique:pages,slug\"}}',6),(52,6,'status','select_dropdown','Status',1,1,1,1,1,1,'{\"default\":\"INACTIVE\",\"options\":{\"INACTIVE\":\"INACTIVE\",\"ACTIVE\":\"ACTIVE\"}}',9),(53,6,'created_at','timestamp','Created At',1,1,1,0,0,0,NULL,10),(54,6,'updated_at','timestamp','Updated At',1,0,0,0,0,0,NULL,11),(55,6,'image','image','Page Image',0,1,1,1,1,1,NULL,12),(56,9,'id','text','Id',1,0,0,0,0,0,'{}',1),(57,9,'title','text','Title',1,1,1,1,1,1,'{\"display\":{\"width\":\"10\"}}',2),(58,9,'slug','text','Slug',1,1,1,1,1,1,'{\"slugify\":{\"origin\":\"title\"},\"validation\":{\"rule\":\"unique:product_categories,slug\"}}',4),(59,9,'description','markdown_editor','Description',0,1,1,1,1,1,'{}',5),(60,9,'created_at','timestamp','Created At',0,1,1,1,0,1,'{}',7),(61,9,'updated_at','timestamp','Updated At',0,0,0,0,0,0,'{}',8),(80,13,'id','text','Id',1,0,0,0,0,0,'{}',1),(81,13,'name','text','Name',1,1,1,1,1,1,'{}',2),(82,15,'id','text','Id',1,0,0,0,0,0,'{}',1),(83,15,'attribute_id','select_dropdown','Attribute',1,0,1,1,1,1,'{\"display\":{\"width\":\"4\"},\"relationship\":{\"key\":\"id\",\"label\":\"name\",\"table\":\"attributes\"}}',3),(84,15,'value','text','Value',1,1,1,1,1,1,'{\"display\":{\"width\":\"8\"}}',4),(86,15,'attribute_value_hasone_attribute_relationship','relationship','Attribute',0,1,0,0,0,0,'{\"model\":\"App\\\\Models\\\\Attribute\",\"table\":\"attributes\",\"type\":\"hasOne\",\"column\":\"id\",\"key\":\"attribute_id\",\"label\":\"name\",\"pivot_table\":\"attribute_values\",\"pivot\":\"0\",\"taggable\":\"0\"}',2),(87,17,'id','text','Id',1,0,0,0,0,0,'{}',1),(88,17,'title','text','Title',1,1,1,1,1,1,'{}',2),(89,17,'description','rich_text_box','Description',0,0,1,1,1,1,'{}',3),(90,17,'image','media_picker','Image',1,1,1,1,1,1,'{}',6),(91,17,'created_at','timestamp','Created At',0,0,1,1,0,1,'{}',7),(92,17,'updated_at','timestamp','Updated At',0,0,0,0,0,0,'{}',8),(93,9,'image','media_picker','Image',0,1,1,1,1,1,'{}',6),(95,18,'id','text','Id',1,1,0,0,0,0,'{}',1),(96,18,'cart','text','Cart',0,0,1,0,0,1,'{}',3),(97,18,'total_price','text','Total Price',0,1,1,1,0,1,'{}',4),(98,18,'first_name','text','First Name',0,1,1,1,0,1,'{}',6),(99,18,'last_name','text','Last Name',0,1,1,1,1,1,'{}',7),(100,18,'phone','text','Phone',1,1,1,1,0,1,'{}',8),(101,18,'email','text','Email',0,0,1,1,0,1,'{}',9),(102,18,'settlement_code','text','Settlement Code',0,0,1,1,0,1,'{}',10),(103,18,'settlement','text','Settlement',0,0,1,1,0,1,'{}',11),(104,18,'office_code','text','Office Code',0,0,1,1,0,1,'{}',12),(105,18,'office','text','Office',0,0,1,1,0,1,'{}',13),(106,18,'created_at','timestamp','Created At',0,0,1,0,0,1,'{}',14),(107,18,'updated_at','timestamp','Updated At',0,0,0,0,0,0,'{}',15),(110,19,'id','text','Id',1,0,0,0,0,0,'{}',1),(111,19,'code','text','Code',1,1,1,1,1,1,'{}',2),(112,19,'symbol','text','Symbol',1,1,1,1,1,1,'{}',3),(113,19,'rate','text','Rate',1,1,1,1,1,1,'{}',4),(114,19,'is_default','checkbox','Is Default',1,1,1,1,1,1,'{}',5),(115,19,'created_at','timestamp','Created At',0,1,1,1,0,1,'{}',7),(116,19,'updated_at','timestamp','Updated At',0,0,0,0,0,0,'{}',8),(117,18,'currency','text','Currency',0,1,1,1,1,1,'{}',5),(119,17,'button_link','text','Button Link',0,1,1,1,1,1,'{\"display\":{\"width\":\"6\"}}',5),(120,17,'button_text','text','Button Text',0,0,1,1,1,1,'{\"display\":{\"width\":\"6\"}}',4),(124,9,'featured','checkbox','Избранное',1,1,1,1,1,1,'{\"display\":{\"width\":\"2\"}}',3),(125,21,'id','text','Id',1,0,0,0,0,0,'{}',1),(126,21,'title','text','Title',1,1,1,1,1,1,'{\"display\":{\"width\":\"4\"}}',2),(127,21,'slug','text','Slug',1,0,1,1,1,1,'{\"display\":{\"width\":\"4\"},\"slugify\":{\"origin\":\"title\"},\"validation\":{\"rule\":\"unique:products,slug\"}}',3),(128,21,'description','rich_text_box','Description',0,0,1,1,1,1,'{}',16),(129,21,'full_description','rich_text_box','Full Description',0,0,1,1,1,1,'{}',17),(130,21,'size_chart','rich_text_box','Size Chart',0,0,1,1,1,1,'{}',18),(131,21,'images','media_picker','Images',0,0,1,1,1,1,'{\"max\":10,\"min\":1,\"expanded\":true,\"show_folders\":true,\"show_toolbar\":true,\"allow_upload\":true,\"allow_move\":true,\"allow_delete\":true,\"allow_create_folder\":true,\"allow_rename\":true,\"allow_crop\":true,\"allowed\":[],\"quality\":100,\"base_path\":\"\\/products\\/{pk}\\/\",\"thumbnails\":[{\"type\":\"resize\",\"name\":\"resize-300\",\"width\":300,\"upsize\":false},{\"type\":\"resize\",\"name\":\"resize-500\",\"width\":500,\"upsize\":false},{\"type\":\"resize\",\"name\":\"resize-800\",\"width\":800,\"upsize\":false},{\"type\":\"resize\",\"name\":\"resize-1200\",\"width\":1200,\"upsize\":false}]}',15),(132,21,'article','text','Article',0,0,1,1,1,1,'{\"display\":{\"width\":\"2\"}}',4),(133,21,'price','number','Price',1,1,1,1,1,1,'{\"display\":{\"width\":\"2\"}}',6),(134,21,'discount_price','number','Discount Price',0,1,1,1,1,1,'{\"display\":{\"width\":\"2\"}}',7),(135,21,'currency_id','select_dropdown','Currency Id',0,0,1,1,1,1,'{\"display\":{\"width\":\"2\"},\"relationship\":{\"key\":\"id\",\"label\":\"code\",\"table\":\"curencies\"}}',9),(136,21,'rating','number','Rating',0,0,1,1,1,1,'{\"display\":{\"width\":\"6\"}}',19),(137,21,'number_of_ratings','number','Number Of Ratings',0,0,1,1,1,1,'{\"display\":{\"width\":\"6\"}}',20),(138,21,'product_category_id','select_dropdown','Product Category Id',0,0,1,1,1,1,'{\"display\":{\"width\":\"2\"},\"relationship\":{\"key\":\"id\",\"label\":\"title\",\"table\":\"product_categories\"}}',5),(139,21,'status','select_dropdown','Status',1,1,1,1,1,1,'{\"display\":{\"width\":\"2\"},\"options\":{\"PUBLISHED\":\"PUBLISHED\",\"NOT_AVAILABLE\":\"NOT AVAILABLE\",\"DRAFT\":\"DRAFT\"}}',14),(140,21,'featured','checkbox','Featured',1,0,1,1,1,1,'{\"display\":{\"width\":\"1\"}}',11),(141,21,'new','checkbox','New',1,0,1,1,1,1,'{\"display\":{\"width\":\"1\"}}',12),(142,21,'created_at','timestamp','Created At',0,0,1,1,0,1,'{}',21),(143,21,'updated_at','timestamp','Updated At',0,0,0,0,0,0,'{}',22),(144,21,'product_hasone_currency_relationship','relationship','currencies',0,1,0,0,0,0,'{\"model\":\"App\\\\Models\\\\Currency\",\"table\":\"currencies\",\"type\":\"hasOne\",\"column\":\"id\",\"key\":\"currency_id\",\"label\":\"code\",\"pivot_table\":\"attribute_values\",\"pivot\":\"0\",\"taggable\":\"0\"}',10),(145,21,'product_hasone_product_category_relationship','relationship','product_categories',0,1,0,0,0,0,'{\"model\":\"App\\\\Models\\\\ProductCategory\",\"table\":\"product_categories\",\"type\":\"hasOne\",\"column\":\"id\",\"key\":\"product_category_id\",\"label\":\"title\",\"pivot_table\":\"attribute_values\",\"pivot\":\"0\",\"taggable\":\"0\"}',23),(147,21,'image_thumbnails','text','Image Thumbnails',0,0,0,0,0,0,'{}',13),(148,22,'id','text','Id',1,0,0,0,0,0,'{}',1),(149,22,'type','text','Type',1,1,1,1,1,1,'{}',2),(150,22,'first_name','text','First Name',0,1,1,1,1,1,'{}',3),(151,22,'last_name','text','Last Name',0,1,1,1,1,1,'{}',4),(152,22,'phone','text','Phone',0,1,1,1,1,1,'{}',5),(153,22,'email','text','Email',0,1,1,1,1,1,'{}',6),(154,22,'message','text_area','Message',0,0,1,1,1,1,'{}',7),(155,22,'data','text','Data',0,0,1,1,1,1,'{}',8),(156,22,'created_at','timestamp','Created At',0,1,1,1,0,1,'{}',9),(157,22,'updated_at','timestamp','Updated At',0,0,0,0,0,0,'{}',10),(158,13,'prime','checkbox','Prime',1,1,1,1,1,1,'{}',3),(159,19,'active','checkbox','Active',1,1,1,1,1,1,'{}',6),(160,18,'status','select_dropdown','Status',1,1,1,1,1,1,'{\"options\":{\"NEW\":\"NEW\",\"IN_PROCESSING\":\"IN_PROCESSING\",\"CLOSED\":\"CLOSED\",\"COMPLETED\":\"COMPLETED\"}}',2),(161,1,'last_name','text','Last Name',0,1,1,1,1,1,'{}',3),(162,1,'phone','text','Phone',0,1,1,1,1,1,'{}',7),(163,1,'email_verified_at','timestamp','Email Verified At',0,1,0,0,0,0,'{}',10),(164,1,'wholesaler','select_dropdown','Wholesaler',1,1,1,1,1,1,'{\"default\":\"option1\",\"options\":{\"null\":\"None\",\"REQUEST\":\"REQUEST\",\"WHOLESALER\":\"WHOLESALER\"}}',12),(165,21,'w_price','text','Wholesale price',0,1,1,1,1,1,'{\"display\":{\"width\":\"2\"}}',8),(166,18,'order_hasone_user_relationship','relationship','users',0,1,1,1,1,1,'{\"model\":\"App\\\\Models\\\\User\",\"table\":\"users\",\"type\":\"hasOne\",\"column\":\"id\",\"key\":\"user_id\",\"label\":\"email\",\"pivot_table\":\"attribute_values\",\"pivot\":\"0\",\"taggable\":\"0\"}',16),(167,18,'user_id','text','User Id',0,1,1,1,1,1,'{}',2);
 /*!40000 ALTER TABLE `data_rows` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,18 +176,18 @@ DROP TABLE IF EXISTS `data_types`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `data_types` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `display_name_singular` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `display_name_plural` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `icon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `model_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `policy_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `controller` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `display_name_singular` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `display_name_plural` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `icon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `model_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `policy_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `controller` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `generate_permissions` tinyint(1) NOT NULL DEFAULT '0',
   `server_side` tinyint NOT NULL DEFAULT '0',
-  `details` text COLLATE utf8mb4_unicode_ci,
+  `details` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -202,7 +202,7 @@ CREATE TABLE `data_types` (
 
 LOCK TABLES `data_types` WRITE;
 /*!40000 ALTER TABLE `data_types` DISABLE KEYS */;
-INSERT INTO `data_types` VALUES (1,'users','users','User','Users','voyager-person','TCG\\Voyager\\Models\\User','TCG\\Voyager\\Policies\\UserPolicy','TCG\\Voyager\\Http\\Controllers\\VoyagerUserController','',1,0,NULL,'2024-10-16 13:30:55','2024-10-16 13:30:55'),(2,'menus','menus','Menu','Menus','voyager-list','TCG\\Voyager\\Models\\Menu',NULL,'','',1,0,NULL,'2024-10-16 13:30:55','2024-10-16 13:30:55'),(3,'roles','roles','Role','Roles','voyager-lock','TCG\\Voyager\\Models\\Role',NULL,'TCG\\Voyager\\Http\\Controllers\\VoyagerRoleController','',1,0,NULL,'2024-10-16 13:30:55','2024-10-16 13:30:55'),(4,'categories','categories','Category','Categories','voyager-categories','App\\Models\\Category',NULL,NULL,NULL,1,0,'{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}','2024-10-16 13:30:55','2024-12-10 14:31:17'),(5,'posts','posts','Post','Posts','voyager-news','App\\Models\\Post','TCG\\Voyager\\Policies\\PostPolicy',NULL,NULL,1,0,'{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}','2024-10-16 13:30:55','2024-12-06 13:46:13'),(6,'pages','pages','Page','Pages','voyager-file-text','App\\Models\\Page',NULL,'','',1,0,NULL,'2024-10-16 13:30:55','2024-10-16 13:30:55'),(9,'product_categories','product-categories','Product Category','Product Categories',NULL,'App\\Models\\ProductCategory',NULL,NULL,NULL,1,0,'{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}','2024-10-16 14:14:27','2024-12-17 11:05:49'),(13,'attributes','attributes','Attribute','Attributes',NULL,'App\\Models\\Attribute',NULL,NULL,NULL,1,0,'{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}','2024-10-16 14:19:22','2024-12-23 17:37:49'),(15,'attribute_values','attribute-values','Attribute Value','Attribute Values',NULL,'App\\Models\\AttributeValue',NULL,NULL,NULL,1,0,'{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}','2024-10-16 14:21:31','2024-10-23 14:39:23'),(16,'main_banner','main-banner','Main Banner','Main Banners',NULL,'App\\Models\\MainBanner',NULL,NULL,NULL,1,0,'{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null}','2024-10-29 14:47:13','2024-10-29 14:47:13'),(17,'main_banners','main-banners','Main Banner','Main Banners',NULL,'App\\Models\\MainBanner',NULL,NULL,NULL,1,0,'{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}','2024-10-29 15:01:15','2024-12-16 20:46:31'),(18,'orders','orders','Order','Orders',NULL,'App\\Models\\Order',NULL,NULL,NULL,1,0,'{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}','2024-11-28 12:46:04','2025-01-05 15:46:02'),(19,'currencies','currencies','Currency','Currencies',NULL,'App\\Models\\Currency',NULL,NULL,NULL,1,0,'{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}','2024-12-11 20:38:40','2025-01-03 17:24:40'),(21,'products','products','Product','Products',NULL,'App\\Models\\Product',NULL,NULL,NULL,1,0,'{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}','2024-12-17 22:41:30','2025-01-07 12:10:57'),(22,'messages','messages','Message','Messages','voyager-file-text','App\\Models\\Message',NULL,NULL,NULL,1,0,'{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}','2024-12-19 13:24:19','2024-12-19 13:37:21');
+INSERT INTO `data_types` VALUES (1,'users','users','User','Users','voyager-person','TCG\\Voyager\\Models\\User','TCG\\Voyager\\Policies\\UserPolicy','TCG\\Voyager\\Http\\Controllers\\VoyagerUserController',NULL,1,0,'{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}','2024-10-16 13:30:55','2025-01-22 13:12:51'),(2,'menus','menus','Menu','Menus','voyager-list','TCG\\Voyager\\Models\\Menu',NULL,'','',1,0,NULL,'2024-10-16 13:30:55','2024-10-16 13:30:55'),(3,'roles','roles','Role','Roles','voyager-lock','TCG\\Voyager\\Models\\Role',NULL,'TCG\\Voyager\\Http\\Controllers\\VoyagerRoleController','',1,0,NULL,'2024-10-16 13:30:55','2024-10-16 13:30:55'),(4,'categories','categories','Category','Categories','voyager-categories','App\\Models\\Category',NULL,NULL,NULL,1,0,'{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}','2024-10-16 13:30:55','2024-12-10 14:31:17'),(5,'posts','posts','Post','Posts','voyager-news','App\\Models\\Post','TCG\\Voyager\\Policies\\PostPolicy',NULL,NULL,1,0,'{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}','2024-10-16 13:30:55','2024-12-06 13:46:13'),(6,'pages','pages','Page','Pages','voyager-file-text','App\\Models\\Page',NULL,'','',1,0,NULL,'2024-10-16 13:30:55','2024-10-16 13:30:55'),(9,'product_categories','product-categories','Product Category','Product Categories',NULL,'App\\Models\\ProductCategory',NULL,NULL,NULL,1,0,'{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}','2024-10-16 14:14:27','2024-12-17 11:05:49'),(13,'attributes','attributes','Attribute','Attributes',NULL,'App\\Models\\Attribute',NULL,NULL,NULL,1,0,'{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}','2024-10-16 14:19:22','2024-12-23 17:37:49'),(15,'attribute_values','attribute-values','Attribute Value','Attribute Values',NULL,'App\\Models\\AttributeValue',NULL,NULL,NULL,1,0,'{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}','2024-10-16 14:21:31','2024-10-23 14:39:23'),(16,'main_banner','main-banner','Main Banner','Main Banners',NULL,'App\\Models\\MainBanner',NULL,NULL,NULL,1,0,'{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null}','2024-10-29 14:47:13','2024-10-29 14:47:13'),(17,'main_banners','main-banners','Main Banner','Main Banners',NULL,'App\\Models\\MainBanner',NULL,NULL,NULL,1,0,'{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}','2024-10-29 15:01:15','2024-12-16 20:46:31'),(18,'orders','orders','Order','Orders',NULL,'App\\Models\\Order',NULL,NULL,NULL,1,0,'{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}','2024-11-28 12:46:04','2025-01-26 16:09:07'),(19,'currencies','currencies','Currency','Currencies',NULL,'App\\Models\\Currency',NULL,NULL,NULL,1,0,'{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}','2024-12-11 20:38:40','2025-01-03 17:24:40'),(21,'products','products','Product','Products',NULL,'App\\Models\\Product',NULL,NULL,NULL,1,0,'{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}','2024-12-17 22:41:30','2025-01-22 13:38:20'),(22,'messages','messages','Message','Messages','voyager-file-text','App\\Models\\Message',NULL,NULL,NULL,1,0,'{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}','2024-12-19 13:24:19','2024-12-19 13:37:21');
 /*!40000 ALTER TABLE `data_types` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -215,11 +215,11 @@ DROP TABLE IF EXISTS `failed_jobs`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `failed_jobs` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uuid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
@@ -236,6 +236,27 @@ LOCK TABLES `failed_jobs` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `laravel`
+--
+
+DROP TABLE IF EXISTS `laravel`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `laravel` (
+  `C1` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `laravel`
+--
+
+LOCK TABLES `laravel` WRITE;
+/*!40000 ALTER TABLE `laravel` DISABLE KEYS */;
+/*!40000 ALTER TABLE `laravel` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `main_banners`
 --
 
@@ -244,11 +265,11 @@ DROP TABLE IF EXISTS `main_banners`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `main_banners` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci,
-  `button_link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `button_text` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `image` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `button_link` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `button_text` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -275,17 +296,17 @@ DROP TABLE IF EXISTS `menu_items`;
 CREATE TABLE `menu_items` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `menu_id` int unsigned DEFAULT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `target` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '_self',
-  `icon_class` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `color` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `target` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '_self',
+  `icon_class` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `color` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `parent_id` int DEFAULT NULL,
   `order` int NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `route` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `parameters` text COLLATE utf8mb4_unicode_ci,
+  `route` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `parameters` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`),
   KEY `menu_items_menu_id_foreign` (`menu_id`),
   CONSTRAINT `menu_items_menu_id_foreign` FOREIGN KEY (`menu_id`) REFERENCES `menus` (`id`) ON DELETE CASCADE
@@ -298,7 +319,7 @@ CREATE TABLE `menu_items` (
 
 LOCK TABLES `menu_items` WRITE;
 /*!40000 ALTER TABLE `menu_items` DISABLE KEYS */;
-INSERT INTO `menu_items` VALUES (1,1,'Dashboard','','_self','voyager-boat',NULL,NULL,1,'2024-10-16 13:30:55','2024-10-16 13:30:55','voyager.dashboard',NULL),(2,1,'Media','','_self','voyager-images',NULL,NULL,11,'2024-10-16 13:30:55','2025-01-08 15:41:10','voyager.media.index',NULL),(3,1,'Users','','_self','voyager-person',NULL,NULL,10,'2024-10-16 13:30:55','2025-01-08 15:41:10','voyager.users.index',NULL),(4,1,'Roles','','_self','voyager-lock',NULL,NULL,9,'2024-10-16 13:30:55','2025-01-08 15:41:10','voyager.roles.index',NULL),(5,1,'Tools','','_self','voyager-tools',NULL,NULL,12,'2024-10-16 13:30:55','2025-01-08 15:41:10',NULL,NULL),(6,1,'Menu Builder','','_self','voyager-list',NULL,5,1,'2024-10-16 13:30:55','2024-10-17 12:34:18','voyager.menus.index',NULL),(7,1,'Database','','_self','voyager-data',NULL,5,2,'2024-10-16 13:30:55','2024-10-17 12:34:18','voyager.database.index',NULL),(8,1,'Compass','','_self','voyager-compass',NULL,5,3,'2024-10-16 13:30:55','2024-10-17 12:34:18','voyager.compass.index',NULL),(9,1,'BREAD','','_self','voyager-bread',NULL,5,4,'2024-10-16 13:30:55','2024-10-17 12:34:18','voyager.bread.index',NULL),(10,1,'Settings','','_self','voyager-settings',NULL,NULL,13,'2024-10-16 13:30:55','2025-01-08 15:41:10','voyager.settings.index',NULL),(11,1,'Categories','','_self','voyager-categories',NULL,NULL,6,'2024-10-16 13:30:55','2025-01-08 15:41:04','voyager.categories.index',NULL),(12,1,'Posts','','_self','voyager-news',NULL,NULL,4,'2024-10-16 13:30:55','2025-01-08 15:41:04','voyager.posts.index',NULL),(13,1,'Pages','','_self','voyager-file-text',NULL,NULL,5,'2024-10-16 13:30:55','2025-01-08 15:41:04','voyager.pages.index',NULL),(14,1,'Product Categories','','_self','voyager-folder','#000000',18,2,'2024-10-16 14:14:27','2024-10-17 12:37:43','voyager.product-categories.index','null'),(16,1,'Attributes','','_self','voyager-list-add','#000000',18,3,'2024-10-16 14:19:22','2024-10-17 12:38:02','voyager.attributes.index','null'),(17,1,'Attribute Values','','_self','voyager-data','#000000',18,4,'2024-10-16 14:21:31','2024-10-17 12:38:14','voyager.attribute-values.index','null'),(18,1,'Shop','','_self','voyager-basket','#000000',NULL,2,'2024-10-17 12:34:03','2024-10-17 12:36:34',NULL,''),(23,1,'Main Banners','','_self','voyager-photos','#000000',NULL,3,'2024-10-29 15:01:16','2025-01-08 15:41:01','voyager.main-banners.index','null'),(25,3,'Комплекти','','_self',NULL,'#000000',36,1,'2024-11-08 13:09:08','2024-12-16 22:15:22','handle-slug','{\"slug\" : \"komplektu\"}'),(26,3,'Боді','','_self',NULL,'#000000',36,2,'2024-11-08 13:09:58','2024-12-16 22:15:22','handle-slug','{\"slug\": \"bodi\"}'),(27,3,'Доставка та оплата','/dostavka-ta-oplata','_self',NULL,'#000000',NULL,3,'2024-11-08 13:10:16','2024-12-16 22:15:10',NULL,''),(29,1,'Odreds','','_self','voyager-buy','#000000',18,5,'2024-11-28 12:46:51','2024-12-02 11:05:05','voyager.orders.index','null'),(30,3,'Статті','','_self',NULL,'#000000',NULL,5,'2024-11-29 11:57:44','2024-12-16 22:15:10','handle-slug','{\"slug\": \"blog\"}'),(32,1,'Currencies','','_self','voyager-credit-card','#000000',NULL,8,'2024-12-11 20:38:40','2025-01-08 15:41:10','voyager.currencies.index','null'),(33,3,'Новинки','/new-products','_self',NULL,'#000000',NULL,2,'2024-12-16 21:39:36','2024-12-16 22:15:10',NULL,''),(35,3,'Піжами та сорочки','','_self',NULL,'#000000',36,3,'2024-12-16 22:03:55','2024-12-16 22:15:22','handle-slug','{\"slug\": \"nichni-sorochki-pizhami\"}'),(36,3,'Товари','#','_self',NULL,'#000000',NULL,1,'2024-12-16 22:15:04','2024-12-16 22:15:08',NULL,''),(37,4,'Комплекти','','_self',NULL,'#000000',NULL,13,'2024-12-17 11:29:38','2024-12-17 11:29:38','handle-slug','{\"slug\": \"komplektu\"}'),(38,4,'Боді','','_self',NULL,'#000000',NULL,14,'2024-12-17 11:30:02','2024-12-17 11:30:02','handle-slug','{\"slug\": \"bodi\"}'),(39,4,'Піжами та сорочки','','_self',NULL,'#000000',NULL,15,'2024-12-17 11:30:21','2024-12-17 11:30:21','handle-slug','{\"slug\": \"nichni-sorochki-pizhami\"}'),(40,5,'Контакты','/contacts','_self',NULL,'#000000',NULL,16,'2024-12-17 11:40:13','2024-12-17 11:40:13',NULL,''),(41,5,'Доставка и оплата','/dostavka-ta-oplata','_self',NULL,'#000000',NULL,17,'2024-12-17 11:40:36','2024-12-17 11:40:36',NULL,''),(42,5,'Статьи','','_self',NULL,'#000000',NULL,18,'2024-12-17 11:41:13','2024-12-17 11:41:13','handle-slug','{\"slug\": \"blog\"}'),(48,1,'voyager::seeders.menu_items.menu_builder','','_self','voyager-list',NULL,47,10,'2024-12-17 19:52:39','2024-12-17 19:52:39','voyager.menus.index',NULL),(49,1,'voyager::seeders.menu_items.database','','_self','voyager-data',NULL,47,11,'2024-12-17 19:52:39','2024-12-17 19:52:39','voyager.database.index',NULL),(50,1,'voyager::seeders.menu_items.compass','','_self','voyager-compass',NULL,47,12,'2024-12-17 19:52:39','2024-12-17 19:52:39','voyager.compass.index',NULL),(51,1,'voyager::seeders.menu_items.bread','','_self','voyager-bread',NULL,47,13,'2024-12-17 19:52:39','2024-12-17 19:52:39','voyager.bread.index',NULL),(53,1,'Products','','_self','voyager-bag','#000000',18,1,'2024-12-17 22:41:30','2024-12-17 23:13:55','voyager.products.index','null'),(54,1,'Messages','','_self','voyager-file-text','#000000',NULL,7,'2024-12-19 13:24:19','2025-01-08 15:41:04','voyager.messages.index','null'),(55,3,'Контакти','/contacts','_self',NULL,'#000000',NULL,20,'2024-12-19 13:29:48','2024-12-19 13:29:48',NULL,'');
+INSERT INTO `menu_items` VALUES (1,1,'Dashboard','','_self','voyager-boat',NULL,NULL,1,'2024-10-16 13:30:55','2024-10-16 13:30:55','voyager.dashboard',NULL),(2,1,'Media','','_self','voyager-images',NULL,NULL,11,'2024-10-16 13:30:55','2025-01-08 15:41:10','voyager.media.index',NULL),(3,1,'Users','','_self','voyager-person',NULL,NULL,10,'2024-10-16 13:30:55','2025-01-08 15:41:10','voyager.users.index',NULL),(4,1,'Roles','','_self','voyager-lock',NULL,NULL,9,'2024-10-16 13:30:55','2025-01-08 15:41:10','voyager.roles.index',NULL),(5,1,'Tools','','_self','voyager-tools',NULL,NULL,12,'2024-10-16 13:30:55','2025-01-08 15:41:10',NULL,NULL),(6,1,'Menu Builder','','_self','voyager-list',NULL,5,1,'2024-10-16 13:30:55','2024-10-17 12:34:18','voyager.menus.index',NULL),(7,1,'Database','','_self','voyager-data',NULL,5,2,'2024-10-16 13:30:55','2024-10-17 12:34:18','voyager.database.index',NULL),(8,1,'Compass','','_self','voyager-compass',NULL,5,3,'2024-10-16 13:30:55','2024-10-17 12:34:18','voyager.compass.index',NULL),(9,1,'BREAD','','_self','voyager-bread',NULL,5,4,'2024-10-16 13:30:55','2024-10-17 12:34:18','voyager.bread.index',NULL),(10,1,'Settings','','_self','voyager-settings',NULL,NULL,13,'2024-10-16 13:30:55','2025-01-08 15:41:10','voyager.settings.index',NULL),(11,1,'Categories','','_self','voyager-categories',NULL,NULL,6,'2024-10-16 13:30:55','2025-01-08 15:41:04','voyager.categories.index',NULL),(12,1,'Posts','','_self','voyager-news',NULL,NULL,4,'2024-10-16 13:30:55','2025-01-08 15:41:04','voyager.posts.index',NULL),(13,1,'Pages','','_self','voyager-file-text',NULL,NULL,5,'2024-10-16 13:30:55','2025-01-08 15:41:04','voyager.pages.index',NULL),(14,1,'Product Categories','','_self','voyager-folder','#000000',18,2,'2024-10-16 14:14:27','2024-10-17 12:37:43','voyager.product-categories.index','null'),(16,1,'Attributes','','_self','voyager-list-add','#000000',18,3,'2024-10-16 14:19:22','2024-10-17 12:38:02','voyager.attributes.index','null'),(17,1,'Attribute Values','','_self','voyager-data','#000000',18,4,'2024-10-16 14:21:31','2024-10-17 12:38:14','voyager.attribute-values.index','null'),(18,1,'Shop','','_self','voyager-basket','#000000',NULL,2,'2024-10-17 12:34:03','2024-10-17 12:36:34',NULL,''),(23,1,'Main Banners','','_self','voyager-photos','#000000',NULL,3,'2024-10-29 15:01:16','2025-01-08 15:41:01','voyager.main-banners.index','null'),(25,3,'Категорія 1','','_self',NULL,'#000000',36,1,'2024-11-08 13:09:08','2025-01-28 16:33:25','handle-slug','{\"slug\":\"category-1\"}'),(26,3,'Категорія 2','','_self',NULL,'#000000',36,2,'2024-11-08 13:09:58','2025-01-28 16:33:41','handle-slug','{\"slug\":\"category-2\"}'),(27,3,'Доставка та оплата','/dostavka-ta-oplata','_self',NULL,'#000000',NULL,3,'2024-11-08 13:10:16','2024-12-16 22:15:10',NULL,''),(29,1,'Odreds','','_self','voyager-buy','#000000',18,5,'2024-11-28 12:46:51','2024-12-02 11:05:05','voyager.orders.index','null'),(30,3,'Статті','','_self',NULL,'#000000',NULL,5,'2024-11-29 11:57:44','2024-12-16 22:15:10','handle-slug','{\"slug\": \"blog\"}'),(32,1,'Currencies','','_self','voyager-credit-card','#000000',NULL,8,'2024-12-11 20:38:40','2025-01-08 15:41:10','voyager.currencies.index','null'),(33,3,'Новинки','/new-products','_self',NULL,'#000000',NULL,2,'2024-12-16 21:39:36','2024-12-16 22:15:10',NULL,''),(36,3,'Товари','#','_self',NULL,'#000000',NULL,1,'2024-12-16 22:15:04','2024-12-16 22:15:08',NULL,''),(37,4,'Категорія 1','','_self',NULL,'#000000',NULL,13,'2024-12-17 11:29:38','2025-01-28 16:31:55','handle-slug','{\"slug\":\"category-1\"}'),(38,4,'Категорія 2','','_self',NULL,'#000000',NULL,14,'2024-12-17 11:30:02','2025-01-28 16:32:19','handle-slug','{\"slug\":\"category-2\"}'),(40,5,'Контакты','/contacts','_self',NULL,'#000000',NULL,16,'2024-12-17 11:40:13','2024-12-17 11:40:13',NULL,''),(41,5,'Доставка и оплата','/dostavka-ta-oplata','_self',NULL,'#000000',NULL,17,'2024-12-17 11:40:36','2024-12-17 11:40:36',NULL,''),(42,5,'Статьи','','_self',NULL,'#000000',NULL,18,'2024-12-17 11:41:13','2024-12-17 11:41:13','handle-slug','{\"slug\": \"blog\"}'),(48,1,'voyager::seeders.menu_items.menu_builder','','_self','voyager-list',NULL,47,10,'2024-12-17 19:52:39','2024-12-17 19:52:39','voyager.menus.index',NULL),(49,1,'voyager::seeders.menu_items.database','','_self','voyager-data',NULL,47,11,'2024-12-17 19:52:39','2024-12-17 19:52:39','voyager.database.index',NULL),(50,1,'voyager::seeders.menu_items.compass','','_self','voyager-compass',NULL,47,12,'2024-12-17 19:52:39','2024-12-17 19:52:39','voyager.compass.index',NULL),(51,1,'voyager::seeders.menu_items.bread','','_self','voyager-bread',NULL,47,13,'2024-12-17 19:52:39','2024-12-17 19:52:39','voyager.bread.index',NULL),(53,1,'Products','','_self','voyager-bag','#000000',18,1,'2024-12-17 22:41:30','2024-12-17 23:13:55','voyager.products.index','null'),(54,1,'Messages','','_self','voyager-file-text','#000000',NULL,7,'2024-12-19 13:24:19','2025-01-08 15:41:04','voyager.messages.index','null'),(55,3,'Контакти','/contacts','_self',NULL,'#000000',NULL,20,'2024-12-19 13:29:48','2024-12-19 13:29:48',NULL,'');
 /*!40000 ALTER TABLE `menu_items` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -311,7 +332,7 @@ DROP TABLE IF EXISTS `menus`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `menus` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -338,12 +359,12 @@ DROP TABLE IF EXISTS `messages`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `messages` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `first_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `last_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `message` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `first_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `message` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `data` json DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -369,25 +390,25 @@ DROP TABLE IF EXISTS `meta_tags`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `meta_tags` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `page_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `page_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `page_id` bigint unsigned NOT NULL,
-  `meta_title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `meta_description` text COLLATE utf8mb4_unicode_ci,
-  `meta_keywords` text COLLATE utf8mb4_unicode_ci,
-  `og_title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `og_description` text COLLATE utf8mb4_unicode_ci,
-  `og_image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `og_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `og_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT 'website',
-  `twitter_title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `twitter_description` text COLLATE utf8mb4_unicode_ci,
-  `twitter_image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `twitter_card` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT 'summary_large_image',
-  `canonical` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `robots` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT 'index, follow',
+  `meta_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `meta_description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_keywords` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `og_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `og_description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `og_image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `og_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `og_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT 'website',
+  `twitter_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `twitter_description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `twitter_image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `twitter_card` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT 'summary_large_image',
+  `canonical` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `robots` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT 'index, follow',
   PRIMARY KEY (`id`),
   KEY `meta_tags_page_type_page_id_index` (`page_type`,`page_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -396,7 +417,7 @@ CREATE TABLE `meta_tags` (
 
 LOCK TABLES `meta_tags` WRITE;
 /*!40000 ALTER TABLE `meta_tags` DISABLE KEYS */;
-INSERT INTO `meta_tags` VALUES (1,'App\\Models\\Post',7,'test1','test2','test3','test5','test6',NULL,'tes7','website','tes','tes','/images/1733508008-6.webp','summary_large_image','test4','noindex, nofollow'),(2,'App\\Models\\Page',3,'sdasd','asdads','asdad',NULL,NULL,NULL,NULL,'website',NULL,NULL,NULL,'summary_large_image','asd','noindex, nofollow'),(3,'App\\Models\\Page',4,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'default',NULL,NULL,NULL,'summary_large_image',NULL,'noindex, nofollow'),(4,'App\\Models\\Page',5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'default',NULL,NULL,NULL,'summary_large_image',NULL,'noindex, nofollow'),(5,'App\\Models\\Page',6,'Crush monobrand',NULL,NULL,NULL,NULL,NULL,NULL,'default',NULL,NULL,NULL,'summary_large_image',NULL,'noindex, nofollow'),(6,'App\\Models\\Category',1,'weqe',NULL,NULL,NULL,NULL,NULL,NULL,'default',NULL,NULL,NULL,'summary_large_image',NULL,'noindex, nofollow'),(7,'App\\Models\\ProductCategory',2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'default',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(8,'App\\Models\\Page',1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'default',NULL,NULL,NULL,'summary_large_image',NULL,'noindex, nofollow'),(9,'App\\Models\\Product',26,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'default',NULL,NULL,NULL,'summary_large_image',NULL,'noindex, nofollow'),(10,'App\\Models\\ProductCategory',3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'default',NULL,NULL,NULL,'summary_large_image',NULL,'noindex, nofollow'),(11,'App\\Models\\ProductCategory',1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'default',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(17,'App\\Models\\Product',32,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'default',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(19,'App\\Models\\Page',7,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'default',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(22,'App\\Models\\Product',4,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'website',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(23,'App\\Models\\Product',5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'website',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(24,'App\\Models\\Product',6,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'website',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(25,'App\\Models\\Product',7,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'website',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(26,'App\\Models\\Product',8,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'website',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(27,'App\\Models\\Product',9,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'website',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(28,'App\\Models\\Product',10,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'website',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(29,'App\\Models\\Product',11,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'website',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(30,'App\\Models\\Product',12,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'website',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(31,'App\\Models\\Product',13,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'website',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(32,'App\\Models\\Product',14,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'website',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(33,'App\\Models\\Product',15,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'website',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(34,'App\\Models\\Product',16,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'website',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(35,'App\\Models\\Product',17,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'website',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(36,'App\\Models\\Product',18,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'website',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(37,'App\\Models\\Product',19,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'website',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(38,'App\\Models\\Product',1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'default',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(39,'App\\Models\\Product',2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'default',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(40,'App\\Models\\Post',5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'default',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(41,'App\\Models\\Post',6,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'default',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow');
+INSERT INTO `meta_tags` VALUES (1,'App\\Models\\Post',7,'test1','test2','test3','test5','test6',NULL,'tes7','website','tes','tes','/images/1733508008-6.webp','summary_large_image','test4','noindex, nofollow'),(2,'App\\Models\\Page',3,'sdasd','asdads','asdad',NULL,NULL,NULL,NULL,'website',NULL,NULL,NULL,'summary_large_image','asd','noindex, nofollow'),(3,'App\\Models\\Page',4,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'default',NULL,NULL,NULL,'summary_large_image',NULL,'noindex, nofollow'),(4,'App\\Models\\Page',5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'default',NULL,NULL,NULL,'summary_large_image',NULL,'noindex, nofollow'),(5,'App\\Models\\Page',6,'Crush monobrand',NULL,NULL,NULL,NULL,NULL,NULL,'default',NULL,NULL,NULL,'summary_large_image',NULL,'noindex, nofollow'),(6,'App\\Models\\Category',1,'weqe',NULL,NULL,NULL,NULL,NULL,NULL,'default',NULL,NULL,NULL,'summary_large_image',NULL,'noindex, nofollow'),(7,'App\\Models\\ProductCategory',2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'default',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(8,'App\\Models\\Page',1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'default',NULL,NULL,NULL,'summary_large_image',NULL,'noindex, nofollow'),(9,'App\\Models\\Product',26,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'default',NULL,NULL,NULL,'summary_large_image',NULL,'noindex, nofollow'),(10,'App\\Models\\ProductCategory',3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'default',NULL,NULL,NULL,'summary_large_image',NULL,'noindex, nofollow'),(11,'App\\Models\\ProductCategory',1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'default',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(17,'App\\Models\\Product',32,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'default',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(19,'App\\Models\\Page',7,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'default',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(22,'App\\Models\\Product',4,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'website',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(23,'App\\Models\\Product',5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'website',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(24,'App\\Models\\Product',6,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'website',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(25,'App\\Models\\Product',7,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'website',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(26,'App\\Models\\Product',8,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'website',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(27,'App\\Models\\Product',9,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'website',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(28,'App\\Models\\Product',10,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'website',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(29,'App\\Models\\Product',11,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'website',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(30,'App\\Models\\Product',12,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'website',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(31,'App\\Models\\Product',13,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'website',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(32,'App\\Models\\Product',14,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'website',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(33,'App\\Models\\Product',15,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'website',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(34,'App\\Models\\Product',16,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'website',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(35,'App\\Models\\Product',17,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'website',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(36,'App\\Models\\Product',18,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'website',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(37,'App\\Models\\Product',19,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'website',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(38,'App\\Models\\Product',1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'default',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(40,'App\\Models\\Post',5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'default',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(41,'App\\Models\\Post',6,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'default',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow'),(42,'App\\Models\\Product',3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'default',NULL,NULL,NULL,'summary_large_image',NULL,'index, follow');
 /*!40000 ALTER TABLE `meta_tags` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -409,10 +430,10 @@ DROP TABLE IF EXISTS `migrations`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `migrations` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=169 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=174 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -421,7 +442,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (113,'2014_10_12_000000_create_users_table',1),(114,'2014_10_12_100000_create_password_reset_tokens_table',1),(115,'2016_01_01_000000_add_voyager_user_fields',1),(116,'2016_01_01_000000_create_data_types_table',1),(117,'2016_01_01_000000_create_pages_table',1),(118,'2016_01_01_000000_create_posts_table',1),(119,'2016_02_15_204651_create_categories_table',1),(120,'2016_05_19_173453_create_menu_table',1),(121,'2016_10_21_190000_create_roles_table',1),(122,'2016_10_21_190000_create_settings_table',1),(123,'2016_11_30_135954_create_permission_table',1),(124,'2016_11_30_141208_create_permission_role_table',1),(125,'2016_12_26_201236_data_types__add__server_side',1),(126,'2017_01_13_000000_add_route_to_menu_items_table',1),(127,'2017_01_14_005015_create_translations_table',1),(128,'2017_01_15_000000_make_table_name_nullable_in_permissions_table',1),(129,'2017_03_06_000000_add_controller_to_data_types_table',1),(130,'2017_04_11_000000_alter_post_nullable_fields_table',1),(131,'2017_04_21_000000_add_order_to_data_rows_table',1),(132,'2017_07_05_210000_add_policyname_to_data_types_table',1),(133,'2017_08_05_000000_add_group_to_settings_table',1),(134,'2017_11_26_013050_add_user_role_relationship',1),(135,'2017_11_26_015000_create_user_roles_table',1),(136,'2018_03_11_000000_add_user_settings',1),(137,'2018_03_14_000000_add_details_to_data_types_table',1),(138,'2018_03_16_000000_make_settings_value_nullable',1),(139,'2019_08_19_000000_create_failed_jobs_table',1),(140,'2019_12_14_000001_create_personal_access_tokens_table',1),(141,'2024_10_10_142042_create_product_categories_table',1),(142,'2024_10_11_120055_create_products_table',1),(143,'2024_10_13_130140_create_attributes_table',1),(144,'2024_10_13_130152_create_attribute_values_table',1),(145,'2024_10_13_130208_create_product_attribute_values_table',1),(146,'2024_10_29_144209_create_main_banners_table',1),(147,'2024_10_29_152715_add_columns_to_product_categories_table',1),(148,'2024_11_10_200755_create_nova_poshta_areas_table',1),(149,'2024_11_10_201704_create_nova_poshta_districts_table',1),(150,'2024_11_10_203740_create_nova_poshta_settlements_table',1),(151,'2024_11_10_204334_create_nova_poshta_offices_table',1),(152,'2024_11_27_092416_create_orders_table',1),(153,'2024_12_05_152731_create_meta_tags_table',1),(154,'2024_12_06_145149_remove_meta_columns_from_pages_and_posts',1),(155,'2024_12_10_124540_add_home_page_setting_to_settings_table',1),(156,'2024_12_11_174713_create_currencies_table',1),(157,'2024_12_11_181409_add_currencies_to_products_table',1),(158,'2024_12_12_143534_add_currency_to_orders_table',1),(159,'2024_12_16_204102_add_colums_to_main_banner_table',1),(160,'2024_12_16_211436_add_colums_to_products_table',1),(161,'2024_12_17_110235_add_colum_to_product_categories_table',1),(162,'2024_12_18_134108_add_colum_image_thumbnails_to_products_table',1),(163,'2024_12_19_124533_create_messages_table',1),(164,'2024_12_20_163927_add_colum_prime_to_attributes_table',1),(165,'2024_12_26_145653_create_telegraph_bots_table',1),(166,'2024_12_26_145654_create_telegraph_chats_table',1),(167,'2025_01_03_192209_add_colum_to_currencies_table',1),(168,'2025_01_05_172400_add_status_to_orders_table',1);
+INSERT INTO `migrations` VALUES (113,'2014_10_12_000000_create_users_table',1),(114,'2014_10_12_100000_create_password_reset_tokens_table',1),(115,'2016_01_01_000000_add_voyager_user_fields',1),(116,'2016_01_01_000000_create_data_types_table',1),(117,'2016_01_01_000000_create_pages_table',1),(118,'2016_01_01_000000_create_posts_table',1),(119,'2016_02_15_204651_create_categories_table',1),(120,'2016_05_19_173453_create_menu_table',1),(121,'2016_10_21_190000_create_roles_table',1),(122,'2016_10_21_190000_create_settings_table',1),(123,'2016_11_30_135954_create_permission_table',1),(124,'2016_11_30_141208_create_permission_role_table',1),(125,'2016_12_26_201236_data_types__add__server_side',1),(126,'2017_01_13_000000_add_route_to_menu_items_table',1),(127,'2017_01_14_005015_create_translations_table',1),(128,'2017_01_15_000000_make_table_name_nullable_in_permissions_table',1),(129,'2017_03_06_000000_add_controller_to_data_types_table',1),(130,'2017_04_11_000000_alter_post_nullable_fields_table',1),(131,'2017_04_21_000000_add_order_to_data_rows_table',1),(132,'2017_07_05_210000_add_policyname_to_data_types_table',1),(133,'2017_08_05_000000_add_group_to_settings_table',1),(134,'2017_11_26_013050_add_user_role_relationship',1),(135,'2017_11_26_015000_create_user_roles_table',1),(136,'2018_03_11_000000_add_user_settings',1),(137,'2018_03_14_000000_add_details_to_data_types_table',1),(138,'2018_03_16_000000_make_settings_value_nullable',1),(139,'2019_08_19_000000_create_failed_jobs_table',1),(140,'2019_12_14_000001_create_personal_access_tokens_table',1),(141,'2024_10_10_142042_create_product_categories_table',1),(142,'2024_10_11_120055_create_products_table',1),(143,'2024_10_13_130140_create_attributes_table',1),(144,'2024_10_13_130152_create_attribute_values_table',1),(145,'2024_10_13_130208_create_product_attribute_values_table',1),(146,'2024_10_29_144209_create_main_banners_table',1),(147,'2024_10_29_152715_add_columns_to_product_categories_table',1),(148,'2024_11_10_200755_create_nova_poshta_areas_table',1),(149,'2024_11_10_201704_create_nova_poshta_districts_table',1),(150,'2024_11_10_203740_create_nova_poshta_settlements_table',1),(151,'2024_11_10_204334_create_nova_poshta_offices_table',1),(152,'2024_11_27_092416_create_orders_table',1),(153,'2024_12_05_152731_create_meta_tags_table',1),(154,'2024_12_06_145149_remove_meta_columns_from_pages_and_posts',1),(155,'2024_12_10_124540_add_home_page_setting_to_settings_table',1),(156,'2024_12_11_174713_create_currencies_table',1),(157,'2024_12_11_181409_add_currencies_to_products_table',1),(158,'2024_12_12_143534_add_currency_to_orders_table',1),(159,'2024_12_16_204102_add_colums_to_main_banner_table',1),(160,'2024_12_16_211436_add_colums_to_products_table',1),(161,'2024_12_17_110235_add_colum_to_product_categories_table',1),(162,'2024_12_18_134108_add_colum_image_thumbnails_to_products_table',1),(163,'2024_12_19_124533_create_messages_table',1),(164,'2024_12_20_163927_add_colum_prime_to_attributes_table',1),(165,'2024_12_26_145653_create_telegraph_bots_table',1),(166,'2024_12_26_145654_create_telegraph_chats_table',1),(167,'2025_01_03_192209_add_colum_to_currencies_table',1),(168,'2025_01_05_172400_add_status_to_orders_table',1),(171,'2025_01_19_124957_add_columns_to_users_table',2),(172,'2025_01_19_130615_add_column_to_orders_table',2),(173,'2025_01_22_133443_add_column_to_products_table',3);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -434,10 +455,10 @@ DROP TABLE IF EXISTS `nova_poshta_areas`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `nova_poshta_areas` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `area_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `area_center` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `settlements_updated_at` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `area_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `area_center` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `settlements_updated_at` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nova_poshta_areas_name_unique` (`name`),
   UNIQUE KEY `nova_poshta_areas_area_code_unique` (`area_code`)
@@ -462,10 +483,10 @@ DROP TABLE IF EXISTS `nova_poshta_districts`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `nova_poshta_districts` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `district_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `district_center` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `area_code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `district_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `district_center` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `area_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nova_poshta_districts_district_code_unique` (`district_code`),
   KEY `nova_poshta_districts_area_code_foreign` (`area_code`),
@@ -491,10 +512,10 @@ DROP TABLE IF EXISTS `nova_poshta_offices`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `nova_poshta_offices` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `office_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `office_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `settlement_code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `office_number` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `office_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `settlement_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nova_poshta_offices_office_code_unique` (`office_code`),
   KEY `nova_poshta_offices_settlement_code_foreign` (`settlement_code`),
@@ -520,9 +541,9 @@ DROP TABLE IF EXISTS `nova_poshta_settlements`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `nova_poshta_settlements` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `settlement_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `district_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `settlement_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `district_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `offices_updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nova_poshta_settlements_settlement_code_unique` (`settlement_code`),
@@ -551,20 +572,23 @@ CREATE TABLE `orders` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `cart` json DEFAULT NULL,
   `total_price` int unsigned DEFAULT NULL,
-  `currency` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `first_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `last_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `settlement_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `settlement` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `office_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `office` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `currency` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `first_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `settlement_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `settlement` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `office_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `office` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `status` enum('NEW','IN_PROCESSING','CLOSED','COMPLETED') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'NEW',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `status` enum('NEW','IN_PROCESSING','CLOSED','COMPLETED') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'NEW',
+  `user_id` bigint unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `orders_user_id_foreign` (`user_id`),
+  CONSTRAINT `orders_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -586,12 +610,12 @@ DROP TABLE IF EXISTS `pages`;
 CREATE TABLE `pages` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `author_id` int NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `excerpt` text COLLATE utf8mb4_unicode_ci,
-  `body` text COLLATE utf8mb4_unicode_ci,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` enum('ACTIVE','INACTIVE') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'INACTIVE',
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `excerpt` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `body` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` enum('ACTIVE','INACTIVE') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'INACTIVE',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -605,7 +629,7 @@ CREATE TABLE `pages` (
 
 LOCK TABLES `pages` WRITE;
 /*!40000 ALTER TABLE `pages` DISABLE KEYS */;
-INSERT INTO `pages` VALUES (1,1,'Доставка та оплата','Hang the jib grog grog blossom grapple dance the hempen jig gangway pressgang bilge rat to go on account lugger. Nelsons folly gabion line draught scallywag fire ship gaff fluke fathom case shot. Sea Legs bilge rat sloop matey gabion long clothes run a shot across the bow Gold Road cog league.','<p>Hello World. Scallywag grog swab Cat o\'nine tails scuttle rigging hardtack cable nipper Yellow Jack. Handsomely spirits knave lad killick landlubber or just lubber deadlights chantey pinnace crack Jennys tea cup. Provost long clothes black spot Yellow Jack bilged on her anchor league lateen sail case shot lee tackle.</p>\r\n<p>Ballast spirits fluke topmast me quarterdeck schooner landlubber or just lubber gabion belaying pin. Pinnace stern galleon starboard warp carouser to go on account dance the hempen jig jolly boat measured fer yer chains. Man-of-war fire in the hole nipperkin handsomely doubloon barkadeer Brethren of the Coast gibbet driver squiffy.</p>','pages/December2024/OzbsDjUVnEfyWkXhA0mG.webp','dostavka-ta-oplata','ACTIVE','2024-10-16 13:30:55','2024-12-10 14:37:06'),(6,1,'Главная','Главная страница',NULL,NULL,'glavnaya','ACTIVE','2024-12-10 13:04:41','2024-12-10 14:25:08'),(7,1,'Контакти','Контакти',NULL,NULL,'contacts','INACTIVE','2024-12-19 13:27:35','2024-12-19 13:29:08');
+INSERT INTO `pages` VALUES (1,1,'Доставка та оплата','Hang the jib grog grog blossom grapple dance the hempen jig gangway pressgang bilge rat to go on account lugger. Nelsons folly gabion line draught scallywag fire ship gaff fluke fathom case shot. Sea Legs bilge rat sloop matey gabion long clothes run a shot across the bow Gold Road cog league.','<p>Hello World. Scallywag grog swab Cat o\'nine tails scuttle rigging hardtack cable nipper Yellow Jack. Handsomely spirits knave lad killick landlubber or just lubber deadlights chantey pinnace crack Jennys tea cup. Provost long clothes black spot Yellow Jack bilged on her anchor league lateen sail case shot lee tackle.</p>\r\n<p>Ballast spirits fluke topmast me quarterdeck schooner landlubber or just lubber gabion belaying pin. Pinnace stern galleon starboard warp carouser to go on account dance the hempen jig jolly boat measured fer yer chains. Man-of-war fire in the hole nipperkin handsomely doubloon barkadeer Brethren of the Coast gibbet driver squiffy.</p>','pages/December2024/OzbsDjUVnEfyWkXhA0mG.webp','dostavka-ta-oplata','ACTIVE','2024-10-16 13:30:55','2024-12-10 14:37:06'),(6,1,'Главная','Главная страница',NULL,NULL,'glavnaya','ACTIVE','2024-12-10 13:04:41','2024-12-10 14:25:08'),(7,1,'Контакти','Контакти',NULL,NULL,'contacts','ACTIVE','2024-12-19 13:27:35','2025-01-27 16:13:05');
 /*!40000 ALTER TABLE `pages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -617,8 +641,8 @@ DROP TABLE IF EXISTS `password_reset_tokens`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `password_reset_tokens` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -670,8 +694,8 @@ DROP TABLE IF EXISTS `permissions`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `permissions` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `table_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `table_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -698,11 +722,11 @@ DROP TABLE IF EXISTS `personal_access_tokens`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `personal_access_tokens` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `tokenable_id` bigint unsigned NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `expires_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -733,12 +757,12 @@ CREATE TABLE `posts` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `author_id` int NOT NULL,
   `category_id` int DEFAULT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `excerpt` text COLLATE utf8mb4_unicode_ci,
-  `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` enum('PUBLISHED','DRAFT','PENDING') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'DRAFT',
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `excerpt` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `body` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` enum('PUBLISHED','DRAFT','PENDING') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'DRAFT',
   `featured` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -773,7 +797,7 @@ CREATE TABLE `product_attribute_values` (
   KEY `product_attribute_values_attribute_value_id_foreign` (`attribute_value_id`),
   CONSTRAINT `product_attribute_values_attribute_value_id_foreign` FOREIGN KEY (`attribute_value_id`) REFERENCES `attribute_values` (`id`) ON DELETE CASCADE,
   CONSTRAINT `product_attribute_values_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -782,7 +806,7 @@ CREATE TABLE `product_attribute_values` (
 
 LOCK TABLES `product_attribute_values` WRITE;
 /*!40000 ALTER TABLE `product_attribute_values` DISABLE KEYS */;
-INSERT INTO `product_attribute_values` VALUES (1,1,9),(2,1,19),(3,1,21),(4,2,16),(5,2,18),(6,2,19),(7,2,20),(8,2,23);
+INSERT INTO `product_attribute_values` VALUES (1,1,9),(2,1,19),(3,1,21),(9,3,7),(10,3,20),(11,3,21),(12,3,22);
 /*!40000 ALTER TABLE `product_attribute_values` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -795,10 +819,10 @@ DROP TABLE IF EXISTS `product_categories`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `product_categories` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `featured` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -825,32 +849,33 @@ DROP TABLE IF EXISTS `products`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `products` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci,
-  `full_description` text COLLATE utf8mb4_unicode_ci,
-  `size_chart` text COLLATE utf8mb4_unicode_ci,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `full_description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `size_chart` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `images` json DEFAULT NULL,
   `image_thumbnails` json DEFAULT NULL,
-  `article` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `article` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `price` int unsigned NOT NULL,
   `discount_price` int unsigned DEFAULT NULL,
   `currency_id` bigint unsigned DEFAULT NULL,
   `rating` double(3,2) DEFAULT NULL,
   `number_of_ratings` int unsigned DEFAULT NULL,
   `product_category_id` bigint unsigned DEFAULT NULL,
-  `status` enum('PUBLISHED','NOT_AVAILABLE','DRAFT') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'DRAFT',
+  `status` enum('PUBLISHED','NOT_AVAILABLE','DRAFT') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'DRAFT',
   `featured` tinyint(1) NOT NULL DEFAULT '0',
   `new` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `w_price` int unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `products_article_unique` (`article`),
   KEY `products_product_category_id_foreign` (`product_category_id`),
   KEY `products_currency_id_foreign` (`currency_id`),
   CONSTRAINT `products_currency_id_foreign` FOREIGN KEY (`currency_id`) REFERENCES `currencies` (`id`) ON DELETE SET NULL,
   CONSTRAINT `products_product_category_id_foreign` FOREIGN KEY (`product_category_id`) REFERENCES `product_categories` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -859,7 +884,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'Product 1','product-1','<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>','<h2>Where does it come from?</h2>\r\n<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</p>\r\n<p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>','<table style=\"border-collapse: collapse; width: 100%;\" border=\"1\"><colgroup><col style=\"width: 24.9785%;\"><col style=\"width: 24.9785%;\"><col style=\"width: 24.9785%;\"><col style=\"width: 24.9785%;\"></colgroup>\r\n<tbody>\r\n<tr>\r\n<td>&nbsp;</td>\r\n<td style=\"text-align: center;\"><strong>S</strong></td>\r\n<td style=\"text-align: center;\"><strong>M</strong></td>\r\n<td style=\"text-align: center;\"><strong>L</strong></td>\r\n</tr>\r\n<tr>\r\n<td>size 1</td>\r\n<td style=\"text-align: center;\">86 - 90 см</td>\r\n<td style=\"text-align: center;\">90 - 94 см</td>\r\n<td style=\"text-align: center;\">94 - 98 см</td>\r\n</tr>\r\n<tr>\r\n<td>size 2</td>\r\n<td style=\"text-align: center;\">66 - 70 см</td>\r\n<td style=\"text-align: center;\">70 - 74 см</td>\r\n<td style=\"text-align: center;\">74 - 78 см</td>\r\n</tr>\r\n<tr>\r\n<td>size 3</td>\r\n<td style=\"text-align: center;\">94 - 98 см</td>\r\n<td style=\"text-align: center;\">98 - 102 см</td>\r\n<td style=\"text-align: center;\">102 - 106 см</td>\r\n</tr>\r\n</tbody>\r\n</table>','[\"products/1/pr.jpg\", \"products/1/pr_1.jpg\", \"products/1/pr_2.jpg\"]','[[{\"url\": \"products/1/pr-resize-300.jpg\", \"width\": \"300\"}, {\"url\": \"products/1/pr-resize-500.jpg\", \"width\": \"500\"}, {\"url\": \"products/1/pr-resize-800.jpg\", \"width\": \"800\"}, {\"url\": \"products/1/pr-resize-1200.jpg\", \"width\": \"1200\"}], [{\"url\": \"products/1/pr_1-resize-300.jpg\", \"width\": \"300\"}, {\"url\": \"products/1/pr_1-resize-500.jpg\", \"width\": \"500\"}, {\"url\": \"products/1/pr_1-resize-800.jpg\", \"width\": \"800\"}, {\"url\": \"products/1/pr_1-resize-1200.jpg\", \"width\": \"1200\"}], [{\"url\": \"products/1/pr_2-resize-300.jpg\", \"width\": \"300\"}, {\"url\": \"products/1/pr_2-resize-500.jpg\", \"width\": \"500\"}, {\"url\": \"products/1/pr_2-resize-800.jpg\", \"width\": \"800\"}, {\"url\": \"products/1/pr_2-resize-1200.jpg\", \"width\": \"1200\"}]]','0000001',1000,900,1,NULL,NULL,1,'PUBLISHED',1,1,'2025-01-08 15:14:00','2025-01-08 15:22:02'),(2,'Product 2','product-2','<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>','<h2>Where does it come from?</h2>\r\n<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</p>\r\n<p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>','<table style=\"border-collapse: collapse; width: 100%;\" border=\"1\"><colgroup><col style=\"width: 24.9785%;\"><col style=\"width: 24.9785%;\"><col style=\"width: 24.9785%;\"><col style=\"width: 24.9785%;\"></colgroup>\r\n<tbody>\r\n<tr>\r\n<td>&nbsp;</td>\r\n<td style=\"text-align: center;\"><strong>S</strong></td>\r\n<td style=\"text-align: center;\"><strong>M</strong></td>\r\n<td style=\"text-align: center;\"><strong>L</strong></td>\r\n</tr>\r\n<tr>\r\n<td>size 1</td>\r\n<td style=\"text-align: center;\">86 - 90 см</td>\r\n<td style=\"text-align: center;\">90 - 94 см</td>\r\n<td style=\"text-align: center;\">94 - 98 см</td>\r\n</tr>\r\n<tr>\r\n<td>size 2</td>\r\n<td style=\"text-align: center;\">66 - 70 см</td>\r\n<td style=\"text-align: center;\">70 - 74 см</td>\r\n<td style=\"text-align: center;\">74 - 78 см</td>\r\n</tr>\r\n<tr>\r\n<td>size 3</td>\r\n<td style=\"text-align: center;\">94 - 98 см</td>\r\n<td style=\"text-align: center;\">98 - 102 см</td>\r\n<td style=\"text-align: center;\">102 - 106 см</td>\r\n</tr>\r\n</tbody>\r\n</table>','[\"products/2/pr.jpg\", \"products/2/pr_1.jpg\", \"products/2/pr_2.jpg\"]','[[{\"url\": \"products/2/pr-resize-300.jpg\", \"width\": \"300\"}, {\"url\": \"products/2/pr-resize-500.jpg\", \"width\": \"500\"}, {\"url\": \"products/2/pr-resize-800.jpg\", \"width\": \"800\"}, {\"url\": \"products/2/pr-resize-1200.jpg\", \"width\": \"1200\"}], [{\"url\": \"products/2/pr_1-resize-300.jpg\", \"width\": \"300\"}, {\"url\": \"products/2/pr_1-resize-500.jpg\", \"width\": \"500\"}, {\"url\": \"products/2/pr_1-resize-800.jpg\", \"width\": \"800\"}, {\"url\": \"products/2/pr_1-resize-1200.jpg\", \"width\": \"1200\"}], [{\"url\": \"products/2/pr_2-resize-300.jpg\", \"width\": \"300\"}, {\"url\": \"products/2/pr_2-resize-500.jpg\", \"width\": \"500\"}, {\"url\": \"products/2/pr_2-resize-800.jpg\", \"width\": \"800\"}, {\"url\": \"products/2/pr_2-resize-1200.jpg\", \"width\": \"1200\"}]]','0000002',1200,100,1,5.00,55,2,'PUBLISHED',1,1,'2025-01-08 15:16:00','2025-01-08 15:22:41');
+INSERT INTO `products` VALUES (1,'Product 1','product-1','<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>','<h2>Where does it come from?</h2>\r\n<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</p>\r\n<p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>','<table style=\"border-collapse: collapse; width: 100%;\" border=\"1\"><colgroup><col style=\"width: 24.9785%;\"><col style=\"width: 24.9785%;\"><col style=\"width: 24.9785%;\"><col style=\"width: 24.9785%;\"></colgroup>\r\n<tbody>\r\n<tr>\r\n<td>&nbsp;</td>\r\n<td style=\"text-align: center;\"><strong>S</strong></td>\r\n<td style=\"text-align: center;\"><strong>M</strong></td>\r\n<td style=\"text-align: center;\"><strong>L</strong></td>\r\n</tr>\r\n<tr>\r\n<td>size 1</td>\r\n<td style=\"text-align: center;\">86 - 90 см</td>\r\n<td style=\"text-align: center;\">90 - 94 см</td>\r\n<td style=\"text-align: center;\">94 - 98 см</td>\r\n</tr>\r\n<tr>\r\n<td>size 2</td>\r\n<td style=\"text-align: center;\">66 - 70 см</td>\r\n<td style=\"text-align: center;\">70 - 74 см</td>\r\n<td style=\"text-align: center;\">74 - 78 см</td>\r\n</tr>\r\n<tr>\r\n<td>size 3</td>\r\n<td style=\"text-align: center;\">94 - 98 см</td>\r\n<td style=\"text-align: center;\">98 - 102 см</td>\r\n<td style=\"text-align: center;\">102 - 106 см</td>\r\n</tr>\r\n</tbody>\r\n</table>','[\"products/1/pr.jpg\", \"products/1/pr_1.jpg\", \"products/1/pr_2.jpg\"]','[[{\"url\": \"products/1/pr-resize-300.jpg\", \"width\": \"300\"}, {\"url\": \"products/1/pr-resize-500.jpg\", \"width\": \"500\"}, {\"url\": \"products/1/pr-resize-800.jpg\", \"width\": \"800\"}, {\"url\": \"products/1/pr-resize-1200.jpg\", \"width\": \"1200\"}], [{\"url\": \"products/1/pr_1-resize-300.jpg\", \"width\": \"300\"}, {\"url\": \"products/1/pr_1-resize-500.jpg\", \"width\": \"500\"}, {\"url\": \"products/1/pr_1-resize-800.jpg\", \"width\": \"800\"}, {\"url\": \"products/1/pr_1-resize-1200.jpg\", \"width\": \"1200\"}], [{\"url\": \"products/1/pr_2-resize-300.jpg\", \"width\": \"300\"}, {\"url\": \"products/1/pr_2-resize-500.jpg\", \"width\": \"500\"}, {\"url\": \"products/1/pr_2-resize-800.jpg\", \"width\": \"800\"}, {\"url\": \"products/1/pr_2-resize-1200.jpg\", \"width\": \"1200\"}]]','0000001',1000,900,1,4.00,1,1,'PUBLISHED',1,1,'2025-01-08 15:14:00','2025-01-28 16:47:11',500),(3,'Product 2','product-2','<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>','<h2>Where does it come from?</h2>\r\n<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</p>\r\n<p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>','<table style=\"border-collapse: collapse; width: 100%;\" border=\"1\"><colgroup><col style=\"width: 24.9785%;\"><col style=\"width: 24.9785%;\"><col style=\"width: 24.9785%;\"><col style=\"width: 24.9785%;\"></colgroup>\r\n<tbody>\r\n<tr>\r\n<td>&nbsp;</td>\r\n<td style=\"text-align: center;\"><strong>S</strong></td>\r\n<td style=\"text-align: center;\"><strong>M</strong></td>\r\n<td style=\"text-align: center;\"><strong>L</strong></td>\r\n</tr>\r\n<tr>\r\n<td>size 1</td>\r\n<td style=\"text-align: center;\">86 - 90 см</td>\r\n<td style=\"text-align: center;\">90 - 94 см</td>\r\n<td style=\"text-align: center;\">94 - 98 см</td>\r\n</tr>\r\n<tr>\r\n<td>size 2</td>\r\n<td style=\"text-align: center;\">66 - 70 см</td>\r\n<td style=\"text-align: center;\">70 - 74 см</td>\r\n<td style=\"text-align: center;\">74 - 78 см</td>\r\n</tr>\r\n<tr>\r\n<td>size 3</td>\r\n<td style=\"text-align: center;\">94 - 98 см</td>\r\n<td style=\"text-align: center;\">98 - 102 см</td>\r\n<td style=\"text-align: center;\">102 - 106 см</td>\r\n</tr>\r\n</tbody>\r\n</table>','[\"products/3/pr.jpg\"]','[[{\"url\": \"products/3/pr-resize-300.jpg\", \"width\": \"300\"}, {\"url\": \"products/3/pr-resize-500.jpg\", \"width\": \"500\"}, {\"url\": \"products/3/pr-resize-800.jpg\", \"width\": \"800\"}, {\"url\": \"products/3/pr-resize-1200.jpg\", \"width\": \"1200\"}]]',NULL,2000,1900,1,5.00,55,2,'PUBLISHED',1,1,'2025-01-26 18:31:00','2025-01-28 16:29:30',1500);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -872,8 +897,8 @@ DROP TABLE IF EXISTS `roles`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `roles` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `display_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `display_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -900,13 +925,13 @@ DROP TABLE IF EXISTS `settings`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `settings` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `display_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `value` text COLLATE utf8mb4_unicode_ci,
-  `details` text COLLATE utf8mb4_unicode_ci,
-  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `display_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `details` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `order` int NOT NULL DEFAULT '1',
-  `group` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `group` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `settings_key_unique` (`key`)
 ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -931,8 +956,8 @@ DROP TABLE IF EXISTS `telegraph_bots`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `telegraph_bots` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -958,8 +983,8 @@ DROP TABLE IF EXISTS `telegraph_chats`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `telegraph_chats` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `chat_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `chat_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `telegraph_bot_id` bigint unsigned NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -988,11 +1013,11 @@ DROP TABLE IF EXISTS `translations`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `translations` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `table_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `column_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `table_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `column_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `foreign_key` int unsigned NOT NULL,
-  `locale` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `value` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `locale` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -1047,20 +1072,23 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `role_id` bigint unsigned DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `avatar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT 'users/default.png',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT 'users/default.png',
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `settings` text COLLATE utf8mb4_unicode_ci,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `settings` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `wholesaler` enum('NONE','REQUEST','WHOLESALER') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'NONE',
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`),
   KEY `users_role_id_foreign` (`role_id`),
   CONSTRAINT `users_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1069,7 +1097,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,1,'Admin','admin@admin.com','users/default.png',NULL,'$2y$10$WYtvF172ryqegFnB5k4HTOevaIO2RVeqKwp4z/8Xn0b8S/Fxuf18G','DGtR42WykM6QuTJesGlxhQMu7hCgouRhphx4v7TbQYSwZY2pmYrxyi0whXue','{\"locale\":\"ru\"}','2024-10-16 13:30:55','2024-10-16 13:34:38');
+INSERT INTO `users` VALUES (1,1,'Admin',NULL,NULL,'admin@admin.com','users/default.png',NULL,'$2y$10$WYtvF172ryqegFnB5k4HTOevaIO2RVeqKwp4z/8Xn0b8S/Fxuf18G','8rnFgpLxYWWrfIjVyezG1uKUx24vWSEQb4fH8MxpaDqJ9SOfngqReOuZSmvs','{\"locale\":\"ru\"}','2024-10-16 13:30:55','2024-10-16 13:34:38','NONE');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1082,4 +1110,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-08 17:48:12
+-- Dump completed on 2025-01-28 19:01:22

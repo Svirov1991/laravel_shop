@@ -42,7 +42,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             [\App\Http\Controllers\ProfileController::class, 'updateProfile']
         )->name('profile.update');
         Route::post(
-            '/update-avatar',
+            '/avatar',
             [\App\Http\Controllers\ProfileController::class, 'updateAvatar']
         )->name('profile.update-avatar');
         Route::get(

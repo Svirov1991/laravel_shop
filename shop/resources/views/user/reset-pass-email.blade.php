@@ -31,7 +31,7 @@
                                     @endif
                                 </div>
 
-                                <form method="POST" action="{{ route('password.email') }}">
+                                <form id="password_email" method="POST" action="{{ route('password.email') }}" class="recaptcha">
                                     @csrf
                                     <input type="hidden" name="recaptcha_token" value="recaptcha_token" >
                                     <div class="row">

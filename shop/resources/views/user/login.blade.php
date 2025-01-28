@@ -31,7 +31,7 @@
                                     @enderror()
                                 </div>
 
-                                <form method="POST" action="{{ route('attempt-to-login') }}">
+                                <form method="POST" id="attempt_to_login" action="{{ route('attempt-to-login') }}" class="recaptcha">
                                     @csrf
                                     <input type="hidden" name="recaptcha_token" value="recaptcha_token" >
                                     <div class="row">

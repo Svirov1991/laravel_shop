@@ -25,13 +25,35 @@ class FavoritesService
 
     public function getProducts()
     {
-        return Product::whereIn(
+        $products = Product::whereIn(
             'status',
             ['PUBLISHED', 'NOT_AVAILABlE']
         )->whereIn('id', $this->getFavorites())->with(
             'attributeValues',
             'category'
-        )->paginate(9);
+        );
+        $request  = request();
+        $sort     = $request->get('sort', 'new');
+        switch ($sort) {
+            case 'price-asc':
+                $products->orderByRaw('COALESCE(discount_price, price) ASC');
+                break;
+            case 'price-desc':
+                $products->orderByRaw('COALESCE(discount_price, price) DESC');
+                break;
+            case 'rating':
+                $products->orderBy('rating', 'desc');
+                break;
+            case 'new':
+                $products->orderBy('new', 'desc');
+                $products->orderBy('created_at', 'desc');
+                break;
+            default:
+                $products->orderBy('new', 'desc');
+                $products->orderBy('created_at', 'desc');
+        }
+
+        return $products->paginate(9);
     }
 
     public function toggleFavorite( int $id ){

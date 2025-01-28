@@ -62,8 +62,8 @@ class UserController extends Controller
         $credentials['avatar'] = 'users/user.png';
         $user = User::create($credentials);
         if ( $user ) {
-            $user->sendEmailVerificationNotification();
             Auth::login($user, true);
+            $user->sendEmailVerificationNotification();
 
             return redirect(route('verification.notice'));
         }

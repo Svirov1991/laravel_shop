@@ -6,20 +6,27 @@
         <div class="author-card-avatar" onclick="document.getElementById('avatar-input').click();">
             <img src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}">
         </div>
-        <form id="avatar-form" action="{{ route('profile.update-avatar') }}" method="POST" enctype="multipart/form-data">
+        <form id="avatar_form" class="recaptcha" action="{{ route('profile.update-avatar', [], false) }}" method="POST" enctype="multipart/form-data">
             @csrf
+            <input type="hidden" name="recaptcha_token" value="recaptcha_token" >
             <input
                 type="file"
                 id="avatar-input"
                 name="avatar"
                 style="display: none;"
                 accept="image/*"
-                onchange="document.getElementById('avatar-form').submit();" />
+                onchange="document.getElementById('avatar-form-submit').click();" />
+            <input id="avatar-form-submit" type="submit" style="display: none;" >
         </form>
         <div class="author-card-details">
             <h5 class="author-card-name text-lg">{{ Auth::user()->name }}</h5>
             @if( !empty( session('avatar') ) )
                 <span class="text-success">{{ session('avatar') }}</span>
+            @endif
+            @if ($errors->has('recaptcha_token'))
+                <div class="text-danger">
+                    {{ $errors->first('recaptcha_token') }}
+                </div>
             @endif
             @error('avatar')
             <span class="text-danger">{{ $message }}</span>

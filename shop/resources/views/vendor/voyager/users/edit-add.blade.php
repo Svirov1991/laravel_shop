@@ -45,17 +45,17 @@
                                        value="{{ old('name', $dataTypeContent->name ?? '') }}">
                             </div>
                             <div class="form-group">
-                                <label for="last_name">{{ __('voyager::generic.last_name') }}</label>
-                                <input type="text" class="form-control" id="last_name" name="last_name" placeholder="{{ __('voyager::generic.last_name') }}"
+                                <label for="last_name">{{ 'Last Name' }}</label>
+                                <input type="text" class="form-control" id="last_name" name="last_name" placeholder="{{ 'Last Name' }}"
                                        value="{{ old('last_name', $dataTypeContent->last_name ?? '') }}">
                             </div>
                             <div class="form-group">
-                                <label for="phone">{{ __('voyager::generic.phone') }}</label>
-                                <input type="text" class="form-control" id="phone" name="phone" placeholder="{{ __('voyager::generic.phone') }}"
+                                <label for="phone">{{ 'Phone' }}</label>
+                                <input type="text" class="form-control" id="phone" name="phone" placeholder="{{ 'Phone' }}"
                                        value="{{ old('phone', $dataTypeContent->phone ?? '') }}">
                             </div>
                             <div class="form-group">
-                                <label for="wholesaler">{{ __('voyager::generic.wholesaler') }}</label>
+                                <label for="wholesaler">{{ 'Wholesaler' }}</label>
                                 @php
                                     if (isset($dataTypeContent->wholesaler)) {
                                         $selected_wholesaler = $dataTypeContent->wholesaler;

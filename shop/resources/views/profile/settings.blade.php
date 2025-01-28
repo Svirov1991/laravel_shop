@@ -6,29 +6,29 @@
     @if( !empty( session('success') ) )
         <h4 class="mb-4 text-success">{{ session('success') }}</h4>
     @endif
-    <form class="row" method="POST" action="{{ route('profile.update') }}">
+    <form id="profile_update" class="row recaptcha" method="POST" action="{{ route('profile.update') }}">
         @csrf
         <input type="hidden" name="recaptcha_token" value="recaptcha_token" >
+        @if ($errors->has('recaptcha_token'))
+            <div class="text-danger">
+                {{ $errors->first('recaptcha_token') }}
+            </div>
+        @endif
         <div class="col-md-6">
             <div class="form-group mb-3">
                 <label for="account-fn">{{ __('profile.form.name') }}</label>
                 <input class="form-control" type="text" id="account-fn" name="name" value="{{ Auth::user()->name }}"
                        required="">
                 @error('name')
-                <div class="text-danger">{{ $message }}</div>
+                    <div class="text-danger">{{ $message }}</div>
                 @enderror()
-                @if ($errors->has('recaptcha_token'))
-                    <div class="text-danger">
-                        {{ $errors->first('recaptcha_token') }}
-                    </div>
-                @endif
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group mb-3">
                 <label for="account-ln">{{ __('profile.form.last-name') }}</label>
                 <input class="form-control" type="text" id="account-ln" name="last_name"
-                       value="{{ Auth::user()->last_name }}" required="">
+                       value="{{ Auth::user()->last_name }}" >
                 @error('last_name')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror()

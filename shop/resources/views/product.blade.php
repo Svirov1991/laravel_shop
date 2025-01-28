@@ -9,7 +9,7 @@
         @endif
         <!--== Start Product Single Area Wrapper ==-->
         <section class="product-area product-single-area">
-            <div class="container pt-60 pb-0">
+            <div class="container pt-60 pb-5">
                 <div class="row">
                     <div class="col-12">
                         <div class="product-single-item" data-margin-bottom="63">

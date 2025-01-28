@@ -113,7 +113,28 @@ class ShopController extends Controller
 
     public function new()
     {
-        $products = Product::where('status', 'PUBLISHED')->where('new', 1)->with('attributeValues', 'category')->paginate(9);
+        $products = Product::where('status', 'PUBLISHED')->where('new', 1)->with('attributeValues', 'category');
+        $request = request();
+        $sort = $request->get('sort', 'new');
+        switch ($sort) {
+            case 'price-asc':
+                $products->orderByRaw('COALESCE(discount_price, price) ASC');
+                break;
+            case 'price-desc':
+                $products->orderByRaw('COALESCE(discount_price, price) DESC');
+                break;
+            case 'rating':
+                $products->orderBy('rating', 'desc');
+                break;
+            case 'new':
+                $products->orderBy('new', 'desc');
+                $products->orderBy('created_at', 'desc');
+                break;
+            default:
+                $products->orderBy('new', 'desc');
+                $products->orderBy('created_at', 'desc');
+        }
+        $products = $products->paginate(9);
         $breadcrumbs = [
             ['name' => __('messages.main'), 'url' => route('home')],
             ['name' => __('messages.new_products'), 'url' => route('new-products')],
