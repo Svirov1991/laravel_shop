@@ -17,20 +17,23 @@
                 <div class="row flex-row-reverse">
                     <div class="col-lg-12">
                         <div class="blog-details-content-wrap">
-                            <div class="thumb">
-                                {!! getImage( [
-                                    'image' => $page->image,
-                                    'thumbnails' => [],
-                                    'main_size' => 1170,
-                                    'sizes' => [ 1200 => 100, 'default' => '1170px'],
-                                    'alt' => $page->title,
-                                    ] ) !!}
-                            </div>
+                            @if( !empty( $page->image ))
+                                <div class="thumb">
+                                    {!! getImage( [
+                                        'image' => $page->image,
+                                        'thumbnails' => [],
+                                        'main_size' => 1170,
+                                        'sizes' => [ 1200 => 100, 'default' => '1170px'],
+                                        'alt' => $page->title,
+                                        ] ) !!}
+                                </div>
+                            @endif
+
 {{--                            <div class="content-info">--}}
 {{--                                <h4 class="title">{{ $page->title }}</h4>--}}
 {{--                            </div>--}}
                             <div class="content">
-                                {!! $page->body !!}
+                                {!! $page->render('body'); !!}
                             </div>
                         </div>
                     </div>

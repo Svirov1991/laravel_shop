@@ -131,6 +131,9 @@ class AppServiceProvider extends ServiceProvider
             return (new ResetPasswordNotification($token))->toMail($notifiable);
         });
 
+        Voyager::addFormField("App\\Admin\\FormFields\\GutenbergFieldHandler");
+
+
         //Event::listen(BreadDataAdded::class, ProcessProductImages::class);
     }
 }

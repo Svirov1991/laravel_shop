@@ -16,7 +16,10 @@ Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
     Route::get('products/{id}/edit', [\App\Http\Controllers\VoyagerProductController::class, 'edit'])->name('voyager.products.edit');
     Route::get('products/create', [\App\Http\Controllers\VoyagerProductController::class, 'create'])->name('voyager.products.create');
+    Route::post('gutenberg/block', [\App\Http\Controllers\GutenbergController::class, 'block'])->name('gutenberg.block');
+    Route::post('gutenberg/upload', [\App\Http\Controllers\GutenbergController::class, 'upload'])->name('gutenberg.upload');
 });
+
 
 Route::get('/sitemap.xml', [\App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap');
 Route::get('/robots.txt', [App\Http\Controllers\SitemapController::class, 'robots'])->name('robots');
