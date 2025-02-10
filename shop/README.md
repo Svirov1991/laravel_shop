@@ -78,13 +78,13 @@ our database in the selected settlement) and a drop-down list of branches in the
 ### GUTENBERG editor
 
 1) https://github.com/VanOns/laraberg
-2) Добавлен gutenberg editor в админке в BREAD можно для нужного поля выбрать "Gutenberg field" ( шаблон поля resources/views/vendor/voyager/formfields/gutenberg_field.blade.php )
-3) Регистрация блоков:
- - Класс блока ( example app/Admin/Blocks/MyFirstBlock.php )
- - view блока для вывода в редакторе gutenberg ( resources/views/admin/blocks/my-block.blade.php ). Общий js фал для блоков public/assets/admin/js/gutenberg-editor.js
- - view блока для вывода на странице сайта  ( resources/views/blocks/my-block.blade.php )
- - Регистрация блока в app/Providers/BlocksServiceProvider.php (  $blocksService->registerBlock(new \App\Admin\Blocks\MyFirstBlock()); )
-
+2) Gutenberg editor added in the admin panel in BREAD, you can select "Gutenberg field" for the desired field (field template resources/views/vendor/voyager/formfields/gutenberg_field.blade.php)
+3) Block registration:
+- Block class ( example app/Admin/Blocks/MyFirstBlock.php )
+- Block view for output in the gutenberg editor ( resources/views/admin/blocks/my-block.blade.php ). Common js file for blocks public/assets/admin/js/gutenberg-editor.js
+- Block view for output on the site page ( resources/views/blocks/my-block.blade.php )
+- Block registration in app/Providers/BlocksServiceProvider.php ( $blocksService->registerBlock(new \App\Admin\Blocks\MyFirstBlock()); )
+- 
 ### Library bugs
 
 - Problem with displaying thumbnails in the media editor https://github.com/thedevdojo/voyager/issues/5743
