@@ -5482,3 +5482,6 @@ section .container-fluid {
 .not_available{
   opacity: 0.5;
 }
+.grecaptcha-badge{
+    z-index: 9999;
+}

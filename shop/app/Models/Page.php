@@ -3,7 +3,8 @@
 namespace App\Models;
 
 use TCG\Voyager\Models\Page as BasePage;
-use VanOns\Laraberg\Traits\RendersContent;
+//use VanOns\Laraberg\Traits\RendersContent;
+use App\Traits\RendersContent;
 class Page extends BasePage
 {
     use RendersContent;

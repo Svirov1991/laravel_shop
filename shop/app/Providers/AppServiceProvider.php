@@ -21,6 +21,7 @@ use Illuminate\Auth\Notifications\VerifyEmail;
 use App\Notifications\CustomVerifyEmail;
 use App\Notifications\ResetPasswordNotification;
 use Illuminate\Auth\Notifications\ResetPassword;
+use VanOns\Laraberg\Laraberg;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -132,7 +133,6 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Voyager::addFormField("App\\Admin\\FormFields\\GutenbergFieldHandler");
-
 
         //Event::listen(BreadDataAdded::class, ProcessProductImages::class);
     }

@@ -7,15 +7,18 @@
     @php
         $blocks = app( \App\Services\BlocksService::class)->getBlocks();
     @endphp
-    <script>
-        const gutenberg_blocks = @json($blocks);
-    </script>
-    <script src="/assets/admin/js/gutenberg-editor.js"></script>
+
 @endsection
+<script>
+    const gutenberg_blocks = @json($blocks);
+</script>
+<script src="/assets/admin/js/gutenberg-editor.js"></script>
 <div class="custom-field is-field-{{ $row->field }}">
     <textarea id="field_{{ $row->field }}" name="{{ $row->field }}" hidden>{{ $values }}</textarea>
     <script>
-        const options = {'height': 'auto'};
-        Laraberg.init( 'field_{{ $row->field }}', options );
+        document.addEventListener('DOMContentLoaded', () => {
+            const options = {'height': 'auto'};
+            Laraberg.init( 'field_{{ $row->field }}', options );
+        })
     </script>
 </div>

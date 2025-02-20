@@ -19,20 +19,15 @@ class MainController extends BaseController
 
     public function index()
     {
-        $categories          = ProductCategory::where('featured', 1)->limit(2)->get();
-        $featured_products   = Product::where('featured', 1)->where('status', 'PUBLISHED')->with('category')->limit(4)->get();
-        $discounted_products = Product::whereNotNull('discount_price')->where('status', 'PUBLISHED')->with('category')->limit(4)->get();
-        $latest_posts        = Post::where('status', 'PUBLISHED')->with('category')->latest()->limit(6)->get();
         $home_page           = setting('site.home_page');
         if ( ! empty($home_page)) {
             $home_page = Page::where('id', $home_page)->first();
         }
 
-        $main_banner = MainBanner::all();
         $page        = $home_page ?? [];
         $metaTags    = \App\Services\MetaTagsService::prepareMetaTags($page);
 
-        return view('index', compact('categories', 'featured_products', 'main_banner', 'discounted_products', 'latest_posts', 'metaTags', 'home_page'));
+        return view( 'page', compact( 'metaTags', 'page' ) );
     }
 
     public function handleSlug($url_slug)

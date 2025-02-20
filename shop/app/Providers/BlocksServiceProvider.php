@@ -24,5 +24,12 @@ class BlocksServiceProvider extends ServiceProvider
     {
         $blocksService = app(BlocksService::class);
         $blocksService->registerBlock(new \App\Admin\Blocks\MyFirstBlock());
+        $blocksService->registerBlock(new \App\Admin\Blocks\MainSlider());
+        $blocksService->registerBlock(new \App\Admin\Blocks\InformationBlock());
+        $blocksService->registerBlock(new \App\Admin\Blocks\PopularProducts());
+        $blocksService->registerBlock(new \App\Admin\Blocks\ProductCategories());
+        $blocksService->registerBlock(new \App\Admin\Blocks\LatestPosts());
+        $blocksService->registerBlock(new \App\Admin\Blocks\ContactBlock());
+        $blocksService->registerBlock(new \App\Admin\Blocks\ContactForm());
     }
 }
