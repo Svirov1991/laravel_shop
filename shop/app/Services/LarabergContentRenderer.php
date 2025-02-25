@@ -24,7 +24,7 @@ class LarabergContentRenderer
             if ( strpos($block->blockName, 'my-namespace') !== false ) {
                 $output .= $render;
             } else {
-                $output .= '<section><div class="container pb-1 pt-1">' . $render . '</div></section>';
+                $output .= '<section><div class="container blog-details-content-wrap pb-1 pt-1">' . $render . '</div></section>';
             }
         }
 

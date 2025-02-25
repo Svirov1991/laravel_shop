@@ -19,32 +19,34 @@ class Order extends Model
     {
         $cart = json_decode( $this->cart );
         $cart_items = [];
-        foreach ($cart as $item) {
+        foreach ($cart as $kay => $item) {
             if ( empty( $item->product_id ) ) {
                 continue;
             }
-            $cart_items[(int)$item->product_id] = $item;
+            $cart_items[$item->product_id] = $item->product_id;
         }
-        $keys    = array_values(array_keys($cart_items));
+        $keys    = array_values($cart_items);
 
-        $product = [];
+        $products = [];
         if ( ! empty($keys)) {
-            $product = Product::whereIn('id', $keys)->with('attributeValues')->get()->map(function ($product) use ($cart_items) {
-                $product->cart = (object) $cart_items[$product->id];
-                return $product;
-            })->keyBy('id');
+            $products = Product::whereIn('id', $keys)->with('attributeValues')->get()->keyBy('id');
         }
 
-        foreach ($keys as $key) {
-            if ( ! isset($product[$key])) {
-                $product[$key] = (object) [
+        $cart_products = [];
+        foreach ($cart as $key => $item) {
+            if ( empty($item->product_id) || ! isset( $products[$item->product_id] ) ) {
+                $cart_products[] = (object) [
                     'title' => __('messages.product_not_found'),
                     'cart'  => $cart_items[$key],
                 ];
+            }else{
+                $product = clone $products[$item->product_id];
+                $product->cart = (object) $item;
+                $cart_products [] = $product;
             }
         }
 
-        return $product;
+        return $cart_products;
 
     }
 

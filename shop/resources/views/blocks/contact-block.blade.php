@@ -5,7 +5,7 @@
             <div class="col-md-6 col-lg-4">
                 <div class="contact-info-item">
                     <h4>{{ __('messages.our_contacts') }}</h4>
-                    <p><a href="mailto://{{ setting('site.phone') }}">{{ setting('site.mail') }}</a></p>
+                    <p><a href="mailto://{{ setting('site.mail') }}">{{ setting('site.mail') }}</a></p>
                     <p><a href="tel:{{ setting('site.phone') }}">{{ setting('site.phone') }}</a></p>
                 </div>
             </div>

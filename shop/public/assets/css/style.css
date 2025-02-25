@@ -2439,6 +2439,7 @@ section .container-fluid {
   border: none;
   margin-bottom: 33px;
 }
+
 @media only screen and (max-width: 767px) {
   .product-category-tab-wrap .product-category-nav {
     margin-bottom: 20px;

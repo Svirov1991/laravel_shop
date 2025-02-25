@@ -30,9 +30,7 @@
                 </div>
             </section>
         @endif
-        <div class="blog-details-content-wrap pb-5">
             {!! $page->render('body'); !!}
-        </div>
         <style>
             .blog-details-content-wrap {
                 p {
